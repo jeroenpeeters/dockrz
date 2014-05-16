@@ -1,0 +1,10 @@
+{
+  "name": "dockrz",
+  "version": "0.0.1",
+  "author": "someone",
+  "dependencies": {
+    "request": "^2.34.0",
+    "zappajs": "^0.4.22",
+    "zappajs-partials": "0.0.7"
+  }
+}
