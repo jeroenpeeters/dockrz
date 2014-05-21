@@ -1,14 +1,19 @@
-request = require 'request'
+request   = require 'request'
+config    = require './config'
 
 exports.containers = (cb) ->
-  request 'http://docker1.rni.org:4243/containers/json?all=true', (err, response, body) ->
+  request "#{config.docker.host}/containers/json?all=true", (err, response, body) ->
     cb JSON.parse body
 
 exports.stop = (container, cb) ->
-  request.post "http://docker1.rni.org:4243/containers/#{container.Id}/stop"
-  request.post "http://docker1.rni.org:4243/containers/#{container.Id}/wait", (err, response, body) =>
+  request.post "#{config.docker.host}/containers/#{container.Id}/stop"
+  request.post "#{config.docker.host}/containers/#{container.Id}/wait", (err, response, body) =>
+    cb()
+
+exports.start = (container, cb) ->
+  request.post "#{config.docker.host}/containers/#{container.Id}/start", (err, response, body) =>
     cb()
 
 exports.images = (cb) ->
-  request 'http://docker1.rni.org:4243/images/json', (err, response, body) ->
+  request "#{config.docker.host}/images/json", (err, response, body) ->
     cb JSON.parse body
