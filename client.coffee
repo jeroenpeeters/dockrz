@@ -1,25 +1,48 @@
+mdl = null
+
 exports.view = ->
- # console.log "zappa", zappa
-  @connect()
-  @emit 'containers/stop': 123
-  ImagesViewModel = ->
+  zppa = @     # create zappa alias
+  @connect()   # socket.io connect
+
+  # Knockout view model
+  ViewModel = ->
+    @page = ko.observable 'home'
+
     @images = ko.observableArray()
     @containers = ko.observableArray()
 
-    #$.getJSON '/docker/images', @images
-    $.getJSON '/docker/containers', @containers
-
     @stopContainer = (container) ->
-      zappa.emit 'containers/stop': container.Id
-    @
-  $ ->
-    ko.applyBindings(new ImagesViewModel())
+      zppa.emit 'containers/stop': container
 
-exports.msgbus = ->
-  @connect()
-  @emit some: 'message'
+    @startContainer = (container) ->
+      zppa.emit 'containers/start': container
+
+    @toHomePage = ->
+      @page('home')
+    @toImagesPage = ->
+      @page('images')
+    @toContainersPage = ->
+      @page('containers')
+    @
+
+  # Setup view model and connect to socket.io streams
   $ =>
+    mdl = new ViewModel()
+
     @on containers: ->
-      console.log 'aaaaa'
-      console.log @data
+      mdl.containers @data
+    @on images: ->
+      mdl.images @data
+
+    ko.applyBindings mdl
+
+  # Configure Sammy routes
+  @get '#/home': ->
+    mdl.toHomePage()
+  @get '#/images': ->
+    mdl.toImagesPage()
+  @get '#/containers': ->
+    mdl.toContainersPage()
+
+
 

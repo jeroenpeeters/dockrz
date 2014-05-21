@@ -1,3 +1,9 @@
+body {
+  padding-top:4em;
+}
+.page {
+  padding:2em;
+}
 .tag {
   display:inline-block;
   padding:0.2em;
