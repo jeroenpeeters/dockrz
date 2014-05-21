@@ -1,18 +1,16 @@
 exports.view = ->
+ # console.log "zappa", zappa
+  @connect()
+  @emit 'containers/stop': 123
   ImagesViewModel = ->
     @images = ko.observableArray()
     @containers = ko.observableArray()
 
-    $.getJSON '/docker/images', @images
+    #$.getJSON '/docker/images', @images
     $.getJSON '/docker/containers', @containers
 
-    @stopContainer = (container) =>  
-      console.log container
-      $.ajax
-        url: "/docker/containers/#{container.Id}/stop",
-        type: 'PUT',
-        success: (result) ->
-          console.log result
+    @stopContainer = (container) ->
+      zappa.emit 'containers/stop': container.Id
     @
   $ ->
     ko.applyBindings(new ImagesViewModel())
@@ -24,4 +22,4 @@ exports.msgbus = ->
     @on containers: ->
       console.log 'aaaaa'
       console.log @data
-      
+

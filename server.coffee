@@ -4,7 +4,7 @@ zappajs = require 'zappajs'
 client = require './client'
 
 zappajs ->
-  
+
   @enable 'zappa'
 
   @use 'static'
@@ -13,13 +13,13 @@ zappajs ->
   @enable 'zappa'
 
   @get '/docker/images': ->
-    request 'http://docker1.rni.org:4243/images/json', (err, response, body) =>
-      @send body
+    #request 'http://docker1.rni.org:4243/images/json', (err, response, body) =>
+    #  @send body
 
   @get '/docker/containers': ->
     request 'http://docker1.rni.org:4243/containers/json', (err, response, body) =>
-      @send body
-  
+      @send body # [{Image:'img',Names:['name1']}]
+
   @get '/docker/containers/:id/stop': ->
     #request.post "http://docker1.rni.org:4243/containers/#{@params.id}/stop", (err, response, body) =>
     #  console.log 'blabliebloe'
@@ -27,13 +27,16 @@ zappajs ->
     @emit 'containers': "container stopped"
     @send 200
 
-  @coffee '/view.js': client.view
+  @client '/view.js': client.view
   @client '/msgbus.js': ->
     @connect()
     @emit some: 'message'
     @on 'containers': ->
       console.log 'aaaaa'
       console.log @data
+
+  @on 'containers/stop': ->
+    console.log 'stop container #{@data}'
 
   @on connection: ->
     console.log "wieeee connection!"
@@ -65,7 +68,7 @@ zappajs ->
   @view layout: ->
     doctype 5
     html ->
-      head -> 
+      head ->
         title @title
         script src:'//code.jquery.com/jquery-2.1.1.min.js'
         script src:'//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js'
