@@ -23,11 +23,9 @@ zappajs ->
     docker.stop @data, => docker.containers (data) => @emit containers: data
 
   @on 'containers/start': ->
-    request.post "http://docker1.rni.org:4243/containers/#{@data.Id}/start", (err, response, body) =>
-      docker.containers (data) => @emit containers: data
+    docker.start @data, => docker.containers (data) => @emit containers: data
 
   @on connection: ->
-    console.log "connected"
     docker.containers (data) => @emit containers: data
     docker.images (data) => @emit images: data
 
