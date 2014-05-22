@@ -21,9 +21,10 @@ zappajs ->
 
   @on 'containers/stop': ->
     docker.stop @data, => docker.containers (data) => @emit containers: data
-
   @on 'containers/start': ->
     docker.start @data, => docker.containers (data) => @emit containers: data
+  @on 'containers/remove': ->
+    docker.remove @data, => docker.containers (data) => @emit containers: data
 
   @on connection: ->
     docker.containers (data) => @emit containers: data
@@ -61,6 +62,7 @@ zappajs ->
                 div 'data-bind':'text: $data'
               td ->
                 input 'data-bind':'click: $root.startContainer, visible: $data.Status.indexOf(\'Up\')', type:'button', 'value':'start'
+                input 'data-bind':'click: $root.removeContainer, visible: $data.Status.indexOf(\'Up\')', type:'button', 'value':'remove'
                 input 'data-bind':'click: $root.stopContainer, visible: ~$data.Status.indexOf(\'Up\')', type:'button', 'value':'stop'
 
   @view layout: ->

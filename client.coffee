@@ -13,9 +13,10 @@ exports.view = ->
 
     @stopContainer = (container) ->
       zppa.emit 'containers/stop': container
-
     @startContainer = (container) ->
       zppa.emit 'containers/start': container
+    @removeContainer = (container) ->
+      zppa.emit 'containers/remove': container
 
     @toHomePage = ->
       @page('home')
