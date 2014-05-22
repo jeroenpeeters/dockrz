@@ -3,6 +3,7 @@ zappajs = require 'zappajs'
 
 client = require './client'
 docker = require './docker'
+fleet = require './fleet'
 
 zappajs ->
 
@@ -16,6 +17,9 @@ zappajs ->
       foo: 'bar'
       title: 'Dockrz'
       layout: 'layout'
+  @get '/fleet/machines': ->
+    fleet.machines (data) =>
+      @send data
 
   @client '/view.js': client.view
 
