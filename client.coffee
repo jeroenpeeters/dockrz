@@ -17,6 +17,8 @@ exports.view = ->
       zppa.emit 'containers/start': container
     @removeContainer = (container) ->
       zppa.emit 'containers/remove': container
+    @runImage = (imageId) ->
+      zppa.emit 'containers/create': imageId
 
     @toHomePage = ->
       @page('home')
@@ -42,6 +44,8 @@ exports.view = ->
     mdl.toHomePage()
   @get '#/images': ->
     mdl.toImagesPage()
+  @get '#/image/:id/inst': ->
+    mdl.runImage(@params.id)
   @get '#/containers': ->
     mdl.toContainersPage()
 
