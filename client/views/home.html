@@ -1,0 +1,64 @@
+<template name="layout">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-header"><a class="navbar-brand" href="/">Dockerz</a></div>
+        <ul class="nav navbar-nav">
+            <li {{activeImages}}><a href="/images">Images</a></li>
+            <li {{activeContainers}}><a href="/containers">Containers</a></li>
+        </ul>
+    </nav>
+
+    {{>yield}}
+</template>
+
+<template name="home">
+    <div class="page">Welcome to the amazing Dockrz!</div>
+</template>
+
+<template name="images">
+    <div class="page">
+        <h1>Images</h1>
+        <ul>
+            {{#each images}}
+            <li>
+                {{#each RepoTags}}
+                <div><span class="tag">{{this}}</span><a href="#/image/{{../Id}}/inst">run</a></div>
+                {{/each}}
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name="containers">
+    <div class="page">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Containers</strong></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Status</th>
+                        <th>Image</th>
+                        <th>Names</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each containers}}
+                    <tr>
+                        <td data-bind="css:{success:~$data.Status.indexOf('Up'), danger:$data.Status.indexOf('Up')}">&nbsp;</td>
+                        <td>{{Status}}</td>
+                        <td>{{Image}}</td>
+                        <td>
+                            {{#each Names}}
+                            <div>{{this}}</div>
+                            {{/each}}
+                        </td>
+                        <td><input data-bind="click: $root.startContainer, visible: $data.Status.indexOf('Up')" type="button" value="start" /><input data-bind="click: $root.removeContainer, visible: $data.Status.indexOf('Up')" type="button" value="remove" /><input data-bind="click: $root.stopContainer, visible: ~$data.Status.indexOf('Up')" type="button" value="stop" /></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>

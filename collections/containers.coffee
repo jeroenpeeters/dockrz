@@ -1,0 +1,1 @@
+@Containers = new Meteor.Collection 'containers'
