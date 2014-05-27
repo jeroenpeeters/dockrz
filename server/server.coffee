@@ -2,7 +2,7 @@ Meteor.startup ->
   Meteor.setInterval ->
     Docker.loadContainers()
     Docker.loadImages()
-  , 5000
+  , 1000
   
 Meteor.publish 'containers', -> Containers.find {}
 Meteor.publish 'images', -> Images.find {}
