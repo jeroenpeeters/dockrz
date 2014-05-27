@@ -1,11 +1,15 @@
 Meteor.startup ->
+
+  Containers.remove {}
+  Images.remove {}
+
   Meteor.setInterval ->
-    Docker.loadContainers()
-    Docker.loadImages()
+    Docker.refreshContainers()
+    Docker.refreshImages()
   , 1000
-  
-Meteor.publish 'containers', -> Containers.find {}
-Meteor.publish 'images', -> Images.find {}
+
+Meteor.publish 'containers', (endpoint) -> Containers.find {Endpoint: endpoint}
+Meteor.publish 'images', (endpoint) -> Images.find {Endpoint: endpoint}
 
 Meteor.methods
   startContainer: Docker.startContainer

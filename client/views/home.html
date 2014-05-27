@@ -2,44 +2,56 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header"><a class="navbar-brand" href="/">Dockerz</a></div>
         <ul class="nav navbar-nav">
-            <li {{activeImages}}><a href="/images">Images</a></li>
-            <li {{activeContainers}}><a href="/containers">Containers</a></li>
+            <li {{activeImages}}><a href="/images">Images ({{numImages}})</a></li>
+            <li {{activeContainers}}><a href="/containers">Containers ({{numContainers}})</a></li>
         </ul>
+        <form class="navbar-form navbar-right" style="margin-right:1em;">
+            {{#if docker.endpoints}}
+            <select id="dockerEndpoint" class="form-control">
+                {{#each docker.endpoints}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+            {{/if}}
+        </form>
     </nav>
 
     {{>yield}}
 </template>
 
 <template name="home">
-    <div class="page">Welcome to the amazing Dockrz!</div>
+    <div class="page">
+        <p>Welcome to the amazing Dockrz!</p>
+    </div>
 </template>
 
 <template name="images">
-    <div class="panel panel-default">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th style="width: 90%;">Image tags</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each images}}
-                <tr>
-                    <td>
-                        {{#each RepoTags}}
-                        <div><span class="tag">{{this}}</span></div>
-                        {{/each}}
-                    </td>
-                    <td>
-                        <input class="createContainer" type="button" value="create" />
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+    <div class="page">
+        <div class="panel panel-default">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 90%;">Image tags</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each images}}
+                    <tr>
+                        <td>
+                            {{#each RepoTags}}
+                            <div><span class="tag">{{this}}</span></div>
+                            {{/each}}
+                        </td>
+                        <td>
+                            <input class="createContainer" type="button" value="create" />
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
-
 </template>
 
 <template name="containers">
