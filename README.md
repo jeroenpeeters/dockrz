@@ -1,4 +1,4 @@
 Dockrz
 ======
 
-Awesome Docker frontend build with Meteor!
+Awesome Docker frontend built with Meteor!

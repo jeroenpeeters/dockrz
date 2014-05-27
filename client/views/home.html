@@ -21,8 +21,9 @@
             {{#each images}}
             <li>
                 {{#each RepoTags}}
-                <div><span class="tag">{{this}}</span><a href="#/image/{{../Id}}/inst">run</a></div>
+                <div><span class="tag">{{this}}</span></div>
                 {{/each}}
+                <input class="addContainer" type="button" value="create" />
             </li>
             {{/each}}
         </ul>
@@ -36,17 +37,21 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>Status</th>
-                        <th>Image</th>
-                        <th>Names</th>
+                        <th style="width: 1%;"></th>
+                        <th style="width: 30%;">Status</th>
+                        <th style="width: 39%;">Image</th>
+                        <th style="width: 10%;">Names</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {{#each containers}}
                     <tr>
-                        <td data-bind="css:{success:~$data.Status.indexOf('Up'), danger:$data.Status.indexOf('Up')}">&nbsp;</td>
+                        {{#if isUp}}
+                        <td class="success">&nbsp;</td>
+                        {{else}}
+                        <td class="danger">&nbsp;</td>
+                        {{/if}}
                         <td>{{Status}}</td>
                         <td>{{Image}}</td>
                         <td>
@@ -54,7 +59,14 @@
                             <div>{{this}}</div>
                             {{/each}}
                         </td>
-                        <td><input data-bind="click: $root.startContainer, visible: $data.Status.indexOf('Up')" type="button" value="start" /><input data-bind="click: $root.removeContainer, visible: $data.Status.indexOf('Up')" type="button" value="remove" /><input data-bind="click: $root.stopContainer, visible: ~$data.Status.indexOf('Up')" type="button" value="stop" /></td>
+                        <td>
+                            {{#if isUp}}
+                            <input class="stopContainer" type="button" value="stop" />
+                            {{else}}
+                            <input class="startContainer" type="button" value="start" />
+                            <input class="removeContainer" type="button" value="remove" />
+                            {{/if}}
+                        </td>
                     </tr>
                     {{/each}}
                 </tbody>

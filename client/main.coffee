@@ -1,3 +1,6 @@
+Meteor.subscribe 'containers'
+Meteor.subscribe 'images'
+
 Router.configure
   layoutTemplate: 'layout'
 
