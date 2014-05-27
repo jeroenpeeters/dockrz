@@ -1,2 +1,2 @@
 Template.images.events =
-  'click .addContainer': -> Meteor.call 'createContainer', @Id
+  'click .createContainer': -> Meteor.call 'createContainer', @Id

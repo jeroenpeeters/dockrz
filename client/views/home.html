@@ -15,19 +15,31 @@
 </template>
 
 <template name="images">
-    <div class="page">
-        <h1>Images</h1>
-        <ul>
-            {{#each images}}
-            <li>
-                {{#each RepoTags}}
-                <div><span class="tag">{{this}}</span></div>
+    <div class="panel panel-default">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 90%;">Image tags</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each images}}
+                <tr>
+                    <td>
+                        {{#each RepoTags}}
+                        <div><span class="tag">{{this}}</span></div>
+                        {{/each}}
+                    </td>
+                    <td>
+                        <input class="createContainer" type="button" value="create" />
+                    </td>
+                </tr>
                 {{/each}}
-                <input class="addContainer" type="button" value="create" />
-            </li>
-            {{/each}}
-        </ul>
+            </tbody>
+        </table>
     </div>
+
 </template>
 
 <template name="containers">
