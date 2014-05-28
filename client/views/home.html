@@ -29,6 +29,33 @@
 <template name="fleet">
     <div class="page">
         <div class="panel panel-default">
+            <div class="panel-heading"><strong>Units</strong></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Load</th>
+                        <th>Active</th>
+                        <th>Sub</th>
+                        <th>Description</th>
+                        <th>Machine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each units}}
+                    <tr>
+                        <td>{{unit}}</td>
+                        <td>{{load}}</td>
+                        <td>{{active}}</td>
+                        <td>{{sub}}</td>
+                        <td>{{description}}</td>
+                        <td>{{machine}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-default">
             <div class="panel-heading"><strong>Machines</strong></div>
             <table class="table table-striped">
                 <thead>
