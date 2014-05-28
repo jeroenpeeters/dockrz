@@ -1,5 +1,6 @@
 Session.set 'dockerEndpoint', settings.docker.endpoints[0]
 
+Meteor.subscribe 'machines'
 Deps.autorun ->
   Meteor.subscribe 'containers', Session.get('dockerEndpoint')
   Meteor.subscribe 'images', Session.get('dockerEndpoint')
@@ -33,5 +34,15 @@ Router.map ->
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
       activeContainers: class:"active"
+      docker:
+        endpoints: settings.docker.endpoints
+
+  @route 'fleet',
+    path: '/fleet'
+    data:
+      machines: Machines.find()
+      numContainers: -> Containers.find().count()
+      numImages: -> Images.find().count()
+      activeFleet: class:"active"
       docker:
         endpoints: settings.docker.endpoints

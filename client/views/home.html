@@ -2,6 +2,7 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header"><a class="navbar-brand" href="/">Dockerz</a></div>
         <ul class="nav navbar-nav">
+            <li {{activeFleet}}><a href="/fleet">Fleet</a></li>
             <li {{activeImages}}><a href="/images">Images ({{numImages}})</a></li>
             <li {{activeContainers}}><a href="/containers">Containers ({{numContainers}})</a></li>
         </ul>
@@ -22,6 +23,32 @@
 <template name="home">
     <div class="page">
         <p>Welcome to the amazing Dockrz!</p>
+    </div>
+</template>
+
+<template name="fleet">
+    <div class="page">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Machines</strong></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>IP</th>
+                        <th>Meta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each machines}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{ip}}</td>
+                        <td>{{meta}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -47,13 +74,13 @@
                             <ul class="nav">
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">New container<strong class="caret"></strong></a>
-                                    <div role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
+                                    <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
                                         <div class="form-group" style="width:30em">
                                             <label>Container name</label>
-                                            <input type="text" class="form-control containerName" placeholder="An unique name. Must match `/?[a-zA-Z0-9_-]+`.">
+                                            <input required pattern="/?[a-zA-Z0-9_-]+" type="text" class="form-control containerName" placeholder="An unique name. Must match /?[a-zA-Z0-9_-]+.">
                                         </div>
                                         <button class="createContainer btn btn-primary">create</button>
-                                    </div>
+                                    </form>
                                 </li>
                             </ul>
                         </td>
