@@ -44,7 +44,18 @@
                             {{/each}}
                         </td>
                         <td>
-                            <input class="createContainer" type="button" value="create" />
+                            <ul class="nav">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Create <strong class="caret"></strong></a>
+                                    <div role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
+                                        <div class="form-group">
+                                            <label>Container name</label>
+                                            <input type="text" class="form-control containerName" placeholder="An unique name">
+                                        </div>
+                                        <button class="createContainer btn btn-primary">create</button>
+                                    </div>
+                                </li>
+                            </ul>
                         </td>
                     </tr>
                     {{/each}}
