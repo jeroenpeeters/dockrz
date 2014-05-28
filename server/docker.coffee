@@ -16,19 +16,19 @@
     HTTP.get "#{endpoint}/images/json", (err, result) ->
       _updateCollection Images, result.data, endpoint
 
-  startContainer: (containerId, endpoint) ->
-    HTTP.post "#{endpoint}/containers/#{containerId}/start" #, @loadContainers
+  startContainer: (containerId, endpoint) =>
+    HTTP.post "#{endpoint}/containers/#{containerId}/start", data: {'PublishAllPorts':true}, -> Docker.loadContainers(endpoint)
 
-  stopContainer: (containerId, endpoint) ->
+  stopContainer: (containerId, endpoint) =>
     HTTP.post "#{endpoint}/containers/#{containerId}/stop"
-    HTTP.post "#{endpoint}/containers/#{containerId}/wait" #, @loadContainers
+    HTTP.post "#{endpoint}/containers/#{containerId}/wait", -> Docker.loadContainers(endpoint)
 
-  removeContainer: (containerId, endpoint) ->
+  removeContainer: (containerId, endpoint) =>
     console.log 'remove', containerId, endpoint
-    HTTP.del "#{endpoint}/containers/#{containerId}" #, @loadContainers
+    HTTP.del "#{endpoint}/containers/#{containerId}", -> Docker.loadContainers(endpoint)
 
-  createContainer: (imageId, endpoint) ->
-    HTTP.post "#{endpoint}/containers/create", data: {'Image': imageId} #, @loadContainers
+  createContainer: (imageId, endpoint) =>
+    HTTP.post "#{endpoint}/containers/create", data: {'Image': imageId}, -> Docker.loadContainers(endpoint)
 
 _updateCollection = (collection, data, endpoint) ->
   collection.remove Id: {$nin: _.pluck(data, 'Id')}, Endpoint: endpoint
