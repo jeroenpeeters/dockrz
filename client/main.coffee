@@ -1,3 +1,5 @@
+document.title = 'Dockrz'
+
 Session.set 'dockerEndpoint', settings.docker.endpoints[0]
 
 Meteor.subscribe 'machines'
