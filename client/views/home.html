@@ -39,6 +39,7 @@
                         <th>Sub</th>
                         <th>Description</th>
                         <th>Machine</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +51,14 @@
                         <td>{{sub}}</td>
                         <td>{{description}}</td>
                         <td>{{machine}}</td>
+                        <td>                            
+                            {{#if isActive}}
+                            <input class="stopUnit" type="button" value="stop" />
+                            {{else}}
+                            <input class="startUnit" type="button" value="start" />
+                            {{/if}}
+                            <input class="destroyUnit" type="button" value="destroy" />
+                        </td>                        
                     </tr>
                     {{/each}}
                 </tbody>
