@@ -82,10 +82,12 @@
 <template name="images">
     <div class="page">
         <div class="panel panel-default">
+            <div class="panel-heading"><strong>Images</strong></div>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Image tags</th>
+                        <th>Tags</th>
+                        <th>ID</th>
                         <th style="width:11em;"></th>
                     </tr>
                 </thead>
@@ -96,6 +98,9 @@
                             {{#each RepoTags}}
                             <div><span class="tag">{{this}}</span></div>
                             {{/each}}
+                        </td>
+                        <td>
+                            {{Id}}
                         </td>
                         <td>
                             <ul class="nav">
