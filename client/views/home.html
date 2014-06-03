@@ -29,7 +29,24 @@
 <template name="fleet">
     <div class="page">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Units</strong></div>
+            <div class="panel-heading"><strong>Units</strong>
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Submit new unit<strong class="caret"></strong></a>
+                        <form role="form" class="dropdown-menu" style="padding:1em; width:50em;">
+                            <div class="form-group">
+                                <label>Unit name</label>
+                                <input required type="text" class="form-control" id="unitName" placeholder="A unique name, i.e. kewl.service.">
+                            </div>
+                            <div class="form-group">
+                                <label>Unit code</label>
+                                <textarea required type="textarea" style="max-width: 100%; height:30em;" class="form-control" id="unitCode" placeholder="Systemd unit code."></textarea>
+                            </div>
+                            <button class="btn btn-primary" id="submitUnit">submit</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -118,7 +135,7 @@
                                     <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
                                         <div class="form-group" style="width:30em">
                                             <label>Container name</label>
-                                            <input required pattern="/?[a-zA-Z0-9_-]+" type="text" class="form-control containerName" placeholder="An unique name. Must match /?[a-zA-Z0-9_-]+.">
+                                            <input required pattern="/?[a-zA-Z0-9_-]+" type="text" class="form-control containerName" placeholder="A unique name. Must match /?[a-zA-Z0-9_-]+.">
                                         </div>
                                         <button class="createContainer btn btn-primary">create</button>
                                     </form>

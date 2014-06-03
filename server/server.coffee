@@ -21,6 +21,7 @@ Meteor.methods
   startUnit: Fleet.startUnit
   stopUnit: Fleet.stopUnit
   destroyUnit: Fleet.destroyUnit
+  submitUnit: Fleet.submitUnit
   
 _refresh = ->
   Docker.refreshContainers()
