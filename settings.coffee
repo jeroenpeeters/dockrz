@@ -9,4 +9,4 @@
       'http://docker6.rni.org:4243']
 
   fleet:
-    endpoint: 'ssh rni@docker1.rni.org -p 2000 '
+    endpoint: 'ssh rni@docker-cluster.rni.org -p 443 '
