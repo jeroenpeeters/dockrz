@@ -2,6 +2,7 @@ document.title = 'Dockrz'
 
 Session.set 'dockerEndpoint', settings.docker.endpoints[0]
 
+Meteor.subscribe 'registry'
 Meteor.subscribe 'machines'
 Meteor.subscribe 'units'
 Deps.autorun ->
@@ -17,6 +18,16 @@ Router.map ->
     data:
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
+      docker:
+        endpoints: settings.docker.endpoints
+
+  @route 'registry',
+    path: '/registry'
+    data:
+      registry: Registry.find()
+      numContainers: -> Containers.find().count()
+      numImages: -> Images.find().count()
+      activeRegistry: class:"active"
       docker:
         endpoints: settings.docker.endpoints
 

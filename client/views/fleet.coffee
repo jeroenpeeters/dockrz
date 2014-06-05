@@ -1,4 +1,4 @@
-Template.fleet.isActive = -> ~@active.indexOf('active')
+Template.fleet.isActive = -> @active != null && ~@active.indexOf('active')
 
 Template.fleet.events =
   'click .startUnit': -> Meteor.call 'startUnit', @unit

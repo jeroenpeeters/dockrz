@@ -3,6 +3,7 @@
         <div class="navbar-header"><a class="navbar-brand" href="/">Dockerz</a></div>
         <ul class="nav navbar-nav">
             <li {{activeFleet}}><a href="/fleet">Fleet</a></li>
+            <li {{activeRegistry}}><a href="/registry">Registry</a></li>
             <li {{activeImages}}><a href="/images">Images ({{numImages}})</a></li>
             <li {{activeContainers}}><a href="/containers">Containers ({{numContainers}})</a></li>
         </ul>
@@ -23,6 +24,66 @@
 <template name="home">
     <div class="page">
         <p>Welcome to the amazing Dockrz!</p>
+    </div>
+</template>
+
+<template name="registry">
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                    <div class="name"></div>
+                    <div class="tag"></div>
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Create container</button>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Images</strong></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:40em;">Name</th>
+                        <th style="width:20em;">Tags</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each registry}}
+                    <tr>
+                        <td>
+                            {{name}}
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                {{#each tags}}<option value="{{id}}">{{tag}}</option>{{/each}}
+                            </select>
+                        </td>
+                        <td>
+
+                            <div class="btn-group" style="float:left">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">...</button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li><a href="#" class="newContainer" data-toggle="modal" data-target="#myModal" >New container</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Remove</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -68,14 +129,14 @@
                         <td>{{sub}}</td>
                         <td>{{description}}</td>
                         <td>{{machine}}</td>
-                        <td>                            
+                        <td>
                             {{#if isActive}}
                             <input class="stopUnit" type="button" value="stop" />
                             {{else}}
                             <input class="startUnit" type="button" value="start" />
                             {{/if}}
                             <input class="destroyUnit" type="button" value="destroy" />
-                        </td>                        
+                        </td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -129,18 +190,16 @@
                             {{Id}}
                         </td>
                         <td>
-                            <ul class="nav">
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">New container<strong class="caret"></strong></a>
+                                <div class="btn-group" style="float:left">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">New container <strong class="caret"></strong></button>
                                     <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
                                         <div class="form-group" style="width:30em">
                                             <label>Container name</label>
                                             <input required pattern="/?[a-zA-Z0-9_-]+" type="text" class="form-control containerName" placeholder="A unique name. Must match /?[a-zA-Z0-9_-]+.">
                                         </div>
-                                        <button class="createContainer btn btn-primary">create</button>
+                                        <button type="button" class="createContainer btn btn-primary">create</button>
                                     </form>
-                                </li>
-                            </ul>
+                                </div>
                         </td>
                     </tr>
                     {{/each}}
