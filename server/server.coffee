@@ -4,10 +4,12 @@ Meteor.startup ->
   Images.remove {}
   Machines.remove {}
   Units.remove {}
-  
+  Registry.remove {}
+
   _refresh()
   Meteor.setInterval _refresh, 10000
 
+Meteor.publish 'registry', () -> Registry.find {}
 Meteor.publish 'containers', (endpoint) -> Containers.find {Endpoint: endpoint}
 Meteor.publish 'images', (endpoint) -> Images.find {Endpoint: endpoint}
 Meteor.publish 'machines', () -> Machines.find {}
@@ -22,8 +24,9 @@ Meteor.methods
   stopUnit: Fleet.stopUnit
   destroyUnit: Fleet.destroyUnit
   submitUnit: Fleet.submitUnit
-  
+
 _refresh = ->
+  Docker.loadRegistry()
   Docker.refreshContainers()
   Docker.refreshImages()
   Fleet.listMachines()

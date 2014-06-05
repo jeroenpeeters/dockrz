@@ -16,6 +16,18 @@
     HTTP.get "#{endpoint}/images/json", (err, result) ->
       _updateCollection Images, result.data, endpoint
 
+  loadRegistry: ->
+    reg = []
+    result = HTTP.get "#{settings.docker.registry.endpoint}/v1/search"
+    for r in result.data.results
+      tags = HTTP.get "#{settings.docker.registry.endpoint}/v1/repositories/#{r.name}/tags"
+      reg.push
+        Id: r.name
+        name: r.name
+        description: r.description
+        tags: ({tag: tag, id: id} for tag, id of tags.data)
+    _updateCollection Registry, reg, settings.docker.registry.endpoint
+
   startContainer: (containerId, endpoint) =>
     HTTP.post "#{endpoint}/containers/#{containerId}/start", data: {'PublishAllPorts':true}, -> Docker.loadContainers(endpoint)
 
