@@ -16,7 +16,8 @@
   stopUnit: (unit) -> _controlUnit 'stop', unit
   startUnit: (unit) -> _controlUnit 'start', unit
   destroyUnit: (unit) -> _controlUnit 'destroy', unit
-  submitUnit: (name, code) -> 
+  submitUnit: (name, code, image) -> 
+    if image then code = _generateUnitCode name, image #ignore unit code if docker image is provided
     Fleet.ssh "\"echo '#{code}' > #{name} && fleetctl submit #{name}\"", _refreshUnitList
       
 _controlUnit = (cmd, unit) -> 
@@ -39,3 +40,13 @@ _updateCollection = (collection, data, key) ->
       collection.update opts, item
     else
       collection.insert item
+      
+_generateUnitCode = (unitName, dockerImage) -> """[Unit]
+Description=Automatically generated unit from #{dockerImage}
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker run --name #{unitName}%i -P #{dockerImage}
+ExecStop=/usr/bin/docker stop #{unitName}%i
+ExecStopPost=/usr/bin/docker rm #{unitName}%i
+"""

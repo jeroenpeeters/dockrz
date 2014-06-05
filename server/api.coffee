@@ -16,11 +16,10 @@ Router.map ->
     where: 'server'
     action: ->
       if @request.method == 'POST'
-        [unitName, unitCode] = [@request.body.name, @request.body.code]
-        Fleet.submitUnit unitName, unitCode
+        [unitName, unitCode, dockerImage] = [@request.body.name, @request.body.code, @request.body.image]
+        Fleet.submitUnit unitName, unitCode, dockerImage
         @response.writeHead 200, 'Content-Type': 'text/plain'
         @response.end "Submitted #{unitName}."
       else
         @response.writeHead 405, 'Content-Type': 'text/plain'
         @response.end "#{@request.method} requests are not allowed for this resource."
-  

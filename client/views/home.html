@@ -99,8 +99,18 @@
                             <input required type="text" class="form-control" id="unitName" placeholder="A unique name, i.e. kewl.service.">
                         </div>
                         <div class="form-group">
-                            <label>Unit code</label>
-                            <textarea required type="textarea" style="max-width: 100%; height:30em;" class="form-control" id="unitCode" placeholder="Systemd unit code."></textarea>
+                            <ul class="nav nav-pills" id="unitCodeChoiceTabs">
+                                <li class="active"><a href="#unitCodeTab" data-toggle="tab">Unit code</a></li>
+                                <li><a href="#dockerImageTab" data-toggle="tab">Docker image</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active form-group" id="unitCodeTab">
+                                <textarea type="textarea" style="max-width: 100%; height:30em;" class="form-control" id="unitCode" placeholder="Systemd unit code."></textarea>
+                            </div>
+                            <div class="tab-pane form-group" id="dockerImageTab">
+                                <input type="text" class="form-control" id="dockerImage" placeholder="Complete registry/name of docker image.">
+                            </div>
                         </div>
                         <button class="btn btn-primary" id="submitUnit">submit</button>
                     </form>
