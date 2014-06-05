@@ -6,7 +6,7 @@
 
   loadContainers: (endpoint) ->
     HTTP.get "#{endpoint}/containers/json?all=true", (err, result) ->
-      _updateCollection Containers, result.data, endpoint
+      _updateCollection Containers, result.data, endpoint if result?.data
 
   refreshImages: ->
     for endpoint in settings.docker.endpoints
@@ -14,7 +14,7 @@
 
   loadImages: (endpoint) ->
     HTTP.get "#{endpoint}/images/json", (err, result) ->
-      _updateCollection Images, result.data, endpoint
+      _updateCollection Images, result.data, endpoint if result?.data
 
   loadRegistry: ->
     reg = []
