@@ -91,7 +91,7 @@
     <div class="page">
         <div class="panel panel-default">
             <div class="panel-heading" style="height:4em;"><strong>Units</strong>
-                <div class="btn-group" style="float:right">
+                <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Submit new unit <strong class="caret"></strong></button>
                     <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em; width:50em;">
                         <div class="form-group">
@@ -128,12 +128,14 @@
                         <td>{{description}}</td>
                         <td>{{machine}}</td>
                         <td>
-                            {{#if isActive}}
-                            <input class="stopUnit" type="button" value="stop" />
-                            {{else}}
-                            <input class="startUnit" type="button" value="start" />
-                            {{/if}}
-                            <input class="destroyUnit" type="button" value="destroy" />
+                            <div class="pull-right">
+                                {{#if isActive}}
+                                <button class="stopUnit btn btn-warning">stop</button>
+                                {{else}}
+                                <button class="startUnit btn btn-success">start</button>
+                                {{/if}}
+                                <button class="destroyUnit btn btn-danger">destroy</button>
+                            </div>
                         </td>
                     </tr>
                     {{/each}}
@@ -188,16 +190,16 @@
                             {{Id}}
                         </td>
                         <td>
-                                <div class="btn-group" style="float:left">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">New container <strong class="caret"></strong></button>
-                                    <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
-                                        <div class="form-group" style="width:30em">
-                                            <label>Container name</label>
-                                            <input required pattern="/?[a-zA-Z0-9_-]+" type="text" class="form-control containerName" placeholder="A unique name. Must match /?[a-zA-Z0-9_-]+.">
-                                        </div>
-                                        <button type="button" class="createContainer btn btn-primary">create</button>
-                                    </form>
-                                </div>
+                            <div class="btn-group" style="float:left">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">New container <strong class="caret"></strong></button>
+                                <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
+                                    <div class="form-group" style="width:30em">
+                                        <label>Container name</label>
+                                        <input required pattern="/?[a-zA-Z0-9_-]+" type="text" class="form-control containerName" placeholder="A unique name. Must match /?[a-zA-Z0-9_-]+.">
+                                    </div>
+                                    <button type="button" class="createContainer btn btn-primary">create</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     {{/each}}
@@ -242,12 +244,14 @@
                             {{/each}}
                         </td>
                         <td>
-                            {{#if isUp}}
-                            <input class="stopContainer" type="button" value="stop" />
-                            {{else}}
-                            <input class="startContainer" type="button" value="start" />
-                            <input class="removeContainer" type="button" value="remove" />
-                            {{/if}}
+                            <div class="pull-right">
+                                {{#if isUp}}
+                                <button class="stopContainer btn btn-warning">stop</button>
+                                {{else}}
+                                <button class="startContainer btn btn-success">start</button>
+                                <button class="removeContainer btn btn-danger">remove</button>
+                                {{/if}}
+                            </div>
                         </td>
                     </tr>
                     {{/each}}
