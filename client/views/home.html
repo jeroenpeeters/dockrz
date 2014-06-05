@@ -1,6 +1,6 @@
 <template name="layout">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="navbar-header"><a class="navbar-brand" href="/">Dockerz</a></div>
+        <div class="navbar-header"><a class="navbar-brand" style="padding:0 1em 0 1em" href="/"><img src="/logo-block.png" style="width:2.5em;"/></a></div>
         <ul class="nav navbar-nav">
             <li {{activeFleet}}><a href="/fleet">Fleet</a></li>
             <li {{activeRegistry}}><a href="/registry">Registry</a></li>
@@ -23,7 +23,7 @@
 
 <template name="home">
     <div class="page">
-        <p>Welcome to the amazing Dockrz!</p>
+        <img src="/logo.png" style="display:block; margin-left:auto; margin-right:auto; margin-top:15em;"/>
     </div>
 </template>
 
@@ -90,23 +90,21 @@
 <template name="fleet">
     <div class="page">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Units</strong>
-                <ul class="nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Submit new unit<strong class="caret"></strong></a>
-                        <form role="form" class="dropdown-menu" style="padding:1em; width:50em;">
-                            <div class="form-group">
-                                <label>Unit name</label>
-                                <input required type="text" class="form-control" id="unitName" placeholder="A unique name, i.e. kewl.service.">
-                            </div>
-                            <div class="form-group">
-                                <label>Unit code</label>
-                                <textarea required type="textarea" style="max-width: 100%; height:30em;" class="form-control" id="unitCode" placeholder="Systemd unit code."></textarea>
-                            </div>
-                            <button class="btn btn-primary" id="submitUnit">submit</button>
-                        </form>
-                    </li>
-                </ul>
+            <div class="panel-heading" style="height:4em;"><strong>Units</strong>
+                <div class="btn-group" style="float:right">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Submit new unit <strong class="caret"></strong></button>
+                    <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em; width:50em;">
+                        <div class="form-group">
+                            <label>Unit name</label>
+                            <input required type="text" class="form-control" id="unitName" placeholder="A unique name, i.e. kewl.service.">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit code</label>
+                            <textarea required type="textarea" style="max-width: 100%; height:30em;" class="form-control" id="unitCode" placeholder="Systemd unit code."></textarea>
+                        </div>
+                        <button class="btn btn-primary" id="submitUnit">submit</button>
+                    </form>
+                </div>
             </div>
             <table class="table table-striped">
                 <thead>
