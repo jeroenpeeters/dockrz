@@ -40,7 +40,9 @@
     HTTP.del "#{endpoint}/containers/#{containerId}", -> Docker.loadContainers(endpoint)
 
   createContainer: (imageId, name, endpoint) =>
-    HTTP.post "#{endpoint}/containers/create?name=#{name}", data: {'Image': imageId}, -> Docker.loadContainers(endpoint)
+    HTTP.post "#{endpoint}/containers/create?name=#{name}", data: {'Image': imageId}, (err, res)->
+      console.log err, res
+      Docker.loadContainers(endpoint)
 
 _updateCollection = (collection, data, endpoint) ->
   collection.remove Id: {$nin: _.pluck(data, 'Id')}, Endpoint: endpoint

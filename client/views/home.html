@@ -28,24 +28,6 @@
 </template>
 
 <template name="registry">
-
-    <div id="myModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- dialog body -->
-                <div class="modal-body">
-                    <div class="name"></div>
-                    <div class="tag"></div>
-                </div>
-                <!-- dialog buttons -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Create container</button>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="page">
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Images</strong></div>
@@ -59,24 +41,34 @@
                 </thead>
                 <tbody>
                     {{#each registry}}
-                    <tr>
+                    <tr class="a">
                         <td>
                             {{name}}
                         </td>
-                        <td>
-                            <select class="form-control">
+                        <td class="a">
+                            <select class="form-control tagSelector">
                                 {{#each tags}}<option value="{{id}}">{{tag}}</option>{{/each}}
                             </select>
                         </td>
                         <td>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default dropdown-toggle newContainer" data-toggle="dropdown">New container <strong class="caret"></strong></button>
+                                <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
+                                    <div class="form-group" style="width:35em">
+                                        <p>Creates a new container using image tag <strong>{{name}}:<span class="tag">???</span></strong></p>
+                                        <hr />
+                                        <label>Container name</label>
+                                        <input required pattern="/?[a-zA-Z0-9_-]+" type="text" class="form-control containerName" placeholder="A cool unique name. Must match /?[a-zA-Z0-9_-]+.">
+                                        <label>Docker node</label>
 
-                            <div class="btn-group" style="float:left">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">...</button>
-                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <li><a href="#" class="newContainer" data-toggle="modal" data-target="#myModal" >New container</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Remove</a></li>
-                                </ul>
+                                        <select class="form-control endpoint">
+                                            {{#each ../docker.endpoints}}
+                                            <option value="{{this}}">{{this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <button type="button" class="createContainer btn btn-primary">create</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -181,7 +173,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <strong>Images</strong>
-                <input id="imageFilter" class="pull-right" placeholder="Type here to filter images" />
+                <div class="input-group pull-right" style="margin-top:-0.5em; width:20em;">
+                    <input id="imageFilter" class="form-control" placeholder="Type here to filter images" value="{{imageFilter}}" />
+                    <span class="input-group-btn">
+                        <button id="clearImageFilter" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                     </span>
+                </div>
             </div>
             <table class="table table-striped">
                 <thead>
