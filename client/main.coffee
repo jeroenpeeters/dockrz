@@ -2,6 +2,7 @@ document.title = 'Dockrz'
 
 Session.set 'dockerEndpoint', settings.docker.endpoints[0]
 Session.set 'imageFilter', ''
+Session.set 'containerFilter', ''
 
 Meteor.subscribe 'registry'
 Meteor.subscribe 'machines'
@@ -36,7 +37,7 @@ Router.map ->
     path: '/images'
     data:
       imageFilter: -> Session.get 'imageFilter'
-      images: -> Images.find RepoTags: {$regex: "#{Session.get('imageFilter')}"}
+      images: -> Images.find $or: [{RepoTags: {$regex: "#{Session.get('imageFilter')}"}}, {Id: {$regex: "#{Session.get('imageFilter')}"}}]
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
       activeImages: class:"active"
@@ -46,7 +47,8 @@ Router.map ->
   @route 'containers',
     path: '/containers'
     data:
-      containers: Containers.find()
+      containerFilter: -> Session.get 'containerFilter'
+      containers: -> Containers.find $or: [{Names: {$regex: "#{Session.get('containerFilter')}"}}, {Image: {$regex: "#{Session.get('containerFilter')}"}}]
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
       activeContainers: class:"active"

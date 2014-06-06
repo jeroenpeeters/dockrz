@@ -223,7 +223,15 @@
 <template name="containers">
     <div class="page">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Containers</strong></div>
+            <div class="panel-heading">
+                <strong>Containers</strong>                
+                <div class="input-group pull-right" style="margin-top:-0.5em; width:20em;">
+                    <input id="containerFilter" class="form-control" placeholder="Type here to filter containers" value="{{containerFilter}}" />
+                    <span class="input-group-btn">
+                        <button id="clearContainerFilter" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                     </span>
+                </div>
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>

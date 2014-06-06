@@ -1,5 +1,4 @@
 Template.images.events =
-
   'click .createContainer': (e, template)->
     name = $('.containerName', e.target.parentNode).val()
     Meteor.call 'createContainer', @Id, name, Session.get('dockerEndpoint')
