@@ -33,8 +33,9 @@ Router.map ->
 
   @route 'images',
     path: '/images'
+    beforeAction: -> Session.set 'imageFilter', ''
     data:
-      images: Images.find()
+      images: -> Images.find RepoTags: {$regex: "#{Session.get('imageFilter')}"}
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
       activeImages: class:"active"

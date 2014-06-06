@@ -92,7 +92,7 @@
         <div class="panel panel-default">
             <div class="panel-heading" style="height:4em;"><strong>Units</strong>
                 <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Submit new unit <strong class="caret"></strong></button>
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Submit new unit <strong class="caret"></strong></button>
                     <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em; width:50em;">
                         <div class="form-group">
                             <label>Unit name</label>
@@ -179,7 +179,10 @@
 <template name="images">
     <div class="page">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Images</strong></div>
+            <div class="panel-heading">
+                <strong>Images</strong>
+                <input id="imageFilter" class="pull-right" placeholder="Type here to filter images" />
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
