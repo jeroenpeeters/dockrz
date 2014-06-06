@@ -18,3 +18,12 @@ Clone this repo, or download it as a zip from Github. Go to the directory in whi
   `mrt`
   
 After downloading the required dependencies the application will start.
+
+Configuration
+=============
+
+Dockrz can be configured through the *settings.coffee* file found in the root of the project. Allthough the options are self-explanatory here's a list of what you can configure
+
+- Endpoints for each Docker machine
+- An endpoint for the Docker registry
+- One endpoint for the fleet cluster
