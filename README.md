@@ -15,6 +15,6 @@ Dockrz requires Meteor and Meteorite to be installed.
 
 Clone this repo, or download it as a zip from Github. Go to the directory in which you cloned the Dockrz repository and execute
 
-  mrt
+  `mrt`
   
 After downloading the required dependencies the application will start.
