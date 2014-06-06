@@ -52,22 +52,23 @@
                         </td>
                         <td>
                             <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default dropdown-toggle newContainer" data-toggle="dropdown">New container <strong class="caret"></strong></button>
+                                <button type="button" class="btn btn-default dropdown-toggle pullImageButton" data-toggle="dropdown">Pull <strong class="caret"></strong></button>
                                 <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
                                     <div class="form-group" style="width:35em">
-                                        <p>Creates a new container using image tag <strong>{{name}}:<span class="tag">???</span></strong></p>
+                                        <p>Pulls image <strong>{{name}}:<span class="tag">???</span></strong> onto the selected node.</p>
                                         <hr />
-                                        <label>Container name</label>
-                                        <input required pattern="/?[a-zA-Z0-9_-]+" type="text" class="form-control containerName" placeholder="A cool unique name. Must match /?[a-zA-Z0-9_-]+.">
                                         <label>Docker node</label>
-
                                         <select class="form-control endpoint">
                                             {{#each ../docker.endpoints}}
+                                            {{#if isSelected}}
+                                            <option value="{{this}}" selected>{{this}}</option>
+                                            {{else}}
                                             <option value="{{this}}">{{this}}</option>
+                                            {{/if}}
                                             {{/each}}
                                         </select>
                                     </div>
-                                    <button type="button" class="createContainer btn btn-primary">create</button>
+                                    <button type="button" class="pullImage btn btn-primary">pull</button>
                                 </form>
                             </div>
                         </td>

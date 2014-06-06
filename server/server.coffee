@@ -20,6 +20,7 @@ Meteor.methods
   stopContainer: Docker.stopContainer
   removeContainer: Docker.removeContainer
   createContainer: Docker.createContainer
+  createImage: Docker.createImage
   startUnit: Fleet.startUnit
   stopUnit: Fleet.stopUnit
   destroyUnit: Fleet.destroyUnit

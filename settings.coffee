@@ -12,7 +12,9 @@
       'http://10.19.55.143:4243',
       'http://10.19.55.144:4243']
     registry:
-      endpoint: 'http://docker1.rni.org:5000'
+      protocol: 'http'
+      host:     'docker1.rni.org'
+      port:     '5000'
 
   fleet:
     endpoint: 'ssh rni@docker-cluster.rni.org -p 443 '

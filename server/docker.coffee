@@ -18,9 +18,10 @@
 
   loadRegistry: ->
     reg = []
-    result = HTTP.get "#{settings.docker.registry.endpoint}/v1/search"
+    url = "#{settings.docker.registry.protocol}://#{settings.docker.registry.host}:#{settings.docker.registry.port}"
+    result = HTTP.get "#{url}/v1/search"
     for r in result.data.results
-      tags = HTTP.get "#{settings.docker.registry.endpoint}/v1/repositories/#{r.name}/tags"
+      tags = HTTP.get "#{url}/v1/repositories/#{r.name}/tags"
       reg.push
         Id: r.name
         name: r.name
@@ -40,9 +41,12 @@
     HTTP.del "#{endpoint}/containers/#{containerId}", -> Docker.loadContainers(endpoint)
 
   createContainer: (imageId, name, endpoint) =>
-    HTTP.post "#{endpoint}/containers/create?name=#{name}", data: {'Image': imageId}, (err, res)->
-      console.log err, res
-      Docker.loadContainers(endpoint)
+    HTTP.post "#{endpoint}/containers/create?name=#{name}", data: {'Image': imageId}, -> Docker.loadContainers(endpoint)
+
+  createImage: (imageName, tag, endpoint) =>
+    HTTP.post "#{endpoint}/images/create?fromImage=#{settings.docker.registry.host}:#{settings.docker.registry.port}/#{imageName}&tag=#{tag}", (err,res)->
+      console.log "createImage", err, res
+      Docker.loadImages(endpoint)
 
 _updateCollection = (collection, data, endpoint) ->
   collection.remove Id: {$nin: _.pluck(data, 'Id')}, Endpoint: endpoint
