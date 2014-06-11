@@ -1,0 +1,50 @@
+<template name="images">
+    <div class="page">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Images</strong>
+                <div class="input-group pull-right" style="margin-top:-0.5em; width:20em;">
+                    <input id="imageFilter" class="form-control" placeholder="Type here to filter images" value="{{imageFilter}}" />
+                    <span class="input-group-btn">
+                        <button id="clearImageFilter" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                     </span>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tags</th>
+                        <th>ID</th>
+                        <th style="width:11em;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each images}}
+                    <tr>
+                        <td>
+                            {{#each RepoTags}}
+                            <div><span class="tag">{{this}}</span></div>
+                            {{/each}}
+                        </td>
+                        <td>
+                            {{Id}}
+                        </td>
+                        <td>
+                            <div class="btn-group" style="float:left">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">New container <strong class="caret"></strong></button>
+                                <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
+                                    <div class="form-group" style="width:30em">
+                                        <label>Container name</label>
+                                        <input required pattern="/?[a-zA-Z0-9_-]+" type="text" class="form-control containerName" placeholder="A unique name. Must match /?[a-zA-Z0-9_-]+.">
+                                    </div>
+                                    <button type="button" class="createContainer btn btn-primary">create</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>

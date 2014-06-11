@@ -9,4 +9,11 @@ Template.containers.events =
   
   'click #clearContainerFilter': -> Session.set 'containerFilter', ''
   
-Template.containers.isUp = -> ~@Status.indexOf('Up')
+Template.containers.helpers
+  isUp: -> ~@Status.indexOf('Up')
+  serviceHost: -> Session.get('dockerEndpoint').split(/.+:\/\/(.+):/)[1]
+  serviceProtocol: ->
+    if @PrivatePort in [443, 8443]
+      'https'
+    else 
+      'http'

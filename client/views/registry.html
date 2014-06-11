@@ -1,0 +1,52 @@
+<template name="registry">
+    <div class="page">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Images</strong></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:40em;">Name</th>
+                        <th style="width:20em;">Tags</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each registry}}
+                    <tr class="a">
+                        <td>
+                            {{name}}
+                        </td>
+                        <td class="a">
+                            <select class="form-control tagSelector">
+                                {{#each tags}}<option value="{{id}}">{{tag}}</option>{{/each}}
+                            </select>
+                        </td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default dropdown-toggle pullImageButton" data-toggle="dropdown">Pull <strong class="caret"></strong></button>
+                                <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
+                                    <div class="form-group" style="width:35em">
+                                        <p>Pulls image <strong>{{name}}:<span class="tag">???</span></strong> onto the selected node.</p>
+                                        <hr />
+                                        <label>Docker node</label>
+                                        <select class="form-control endpoint">
+                                            {{#each ../docker.endpoints}}
+                                            {{#if isSelected}}
+                                            <option value="{{this}}" selected>{{this}}</option>
+                                            {{else}}
+                                            <option value="{{this}}">{{this}}</option>
+                                            {{/if}}
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <button type="button" class="pullImage btn btn-primary">pull</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>

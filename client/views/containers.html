@@ -1,0 +1,60 @@
+<template name="containers">
+    <div class="page">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Containers</strong>                
+                <div class="input-group pull-right" style="margin-top:-0.5em; width:20em;">
+                    <input id="containerFilter" class="form-control" placeholder="Type here to filter containers" value="{{containerFilter}}" />
+                    <span class="input-group-btn">
+                        <button id="clearContainerFilter" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                     </span>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 1%;"></th>
+                        <th style="width: 15%;">Status</th>
+                        <th style="width: 39%;">Image</th>
+                        <th style="width: 10%;">Names</th>
+                        <th style="width: 15%;">Ports</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each containers}}
+                    <tr>
+                        {{#if isUp}}
+                        <td class="success">&nbsp;</td>
+                        {{else}}
+                        <td class="danger">&nbsp;</td>
+                        {{/if}}
+                        <td>{{Status}}</td>
+                        <td>{{Image}}</td>
+                        <td>
+                            {{#each Names}}
+                            <div>{{this}}</div>
+                            {{/each}}
+                        </td>
+                        <td>{{#each Ports}}
+                            <div><a href="{{serviceProtocol}}://{{serviceHost}}:{{PublicPort}}">{{PublicPort}} -> {{PrivatePort}}</a></div>
+                            {{/each}}
+                        </td>
+                        <td>
+                            <div class="pull-right">
+                                {{#if isUp}}
+                                <button class="stopContainer btn btn-warning">stop</button>
+                                {{else}}
+                                <button class="startContainer btn btn-success">start</button>
+                                <button class="removeContainer btn btn-danger">remove</button>
+                                {{/if}}
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
+

@@ -1,0 +1,88 @@
+<template name="fleet">
+    <div class="page">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="height:4em;"><strong>Units</strong>
+                <div class="btn-group pull-right">
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Submit new unit <strong class="caret"></strong></button>
+                    <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em; width:50em;">
+                        <div class="form-group">
+                            <label>Unit name</label>
+                            <input required type="text" class="form-control" id="unitName" placeholder="A unique name, i.e. kewl.service.">
+                        </div>
+                        <div class="form-group">
+                            <ul class="nav nav-pills" id="unitCodeChoiceTabs">
+                                <li class="active"><a href="#unitCodeTab" data-toggle="tab">Unit code</a></li>
+                                <li><a href="#dockerImageTab" data-toggle="tab">Docker image</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active form-group" id="unitCodeTab">
+                                <textarea type="textarea" style="max-width: 100%; height:30em;" class="form-control" id="unitCode" placeholder="Systemd unit code."></textarea>
+                            </div>
+                            <div class="tab-pane form-group" id="dockerImageTab">
+                                <input type="text" class="form-control" id="dockerImage" placeholder="Complete registry/name of docker image.">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="submitUnit">submit</button>
+                    </form>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Load</th>
+                        <th>Active</th>
+                        <th>Sub</th>
+                        <th>Description</th>
+                        <th>Machine</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each units}}
+                    <tr>
+                        <td>{{unit}}</td>
+                        <td>{{load}}</td>
+                        <td>{{active}}</td>
+                        <td>{{sub}}</td>
+                        <td>{{description}}</td>
+                        <td>{{machine}}</td>
+                        <td>
+                            <div class="pull-right">
+                                {{#if isActive}}
+                                <button class="stopUnit btn btn-warning">stop</button>
+                                {{else}}
+                                <button class="startUnit btn btn-success">start</button>
+                                {{/if}}
+                                <button class="destroyUnit btn btn-danger">destroy</button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Machines</strong></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>IP</th>
+                        <th>Meta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each machines}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{ip}}</td>
+                        <td>{{meta}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
