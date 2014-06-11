@@ -16,5 +16,5 @@
       host:     'docker1.rni.org'
       port:     '5000'
 
-  fleet:
-    endpoint: 'ssh rni@docker-cluster.rni.org -p 443 '
+  coreos:
+    ssh: 'ssh rni@docker-cluster.rni.org -p 443 '

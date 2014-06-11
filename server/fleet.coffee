@@ -1,35 +1,35 @@
-@Fleet =
-  exec: Npm.require('child_process').exec
-  ssh: (cmd, callback) -> Fleet.exec "#{settings.fleet.endpoint} #{cmd}", callback
-  fleetctl: (cmd, callback) -> Fleet.ssh "fleetctl #{cmd}", callback
+exec = Npm.require('child_process').exec
+ssh = (cmd, callback) -> exec "#{settings.coreos.ssh} #{cmd}", callback
+fleetctl = (cmd, callback) -> ssh "fleetctl #{cmd}", callback
   
+@Fleet =
   listMachines: ->
-    Fleet.fleetctl 'list-machines --full --no-legend', Meteor.bindEnvironment (error, stdout, stderr) -> 
-      _updateCollection Machines, _resultSplitter stdout, (m) -> {id: m[0], ip: m[1], meta: m[2]}
+    fleetctl 'list-machines --full --no-legend', Meteor.bindEnvironment (error, stdout, stderr) -> 
+      updateCollection Machines, resultSplitter stdout, (m) -> {id: m[0], ip: m[1], meta: m[2]}
 
   listUnits: ->
-    Fleet.fleetctl 'list-units --full --no-legend', Meteor.bindEnvironment (error, stdout, stderr) -> 
-      _updateCollection Units, _resultSplitter( stdout, (m) -> 
+    fleetctl 'list-units --full --no-legend', Meteor.bindEnvironment (error, stdout, stderr) -> 
+      updateCollection Units, resultSplitter( stdout, (m) -> 
         {unit: m[0], load: m[1], active: m[2], sub: m[3], description: m[4], machine: m[5]})
       , 'unit'
       
-  stopUnit: (unit) -> _controlUnit 'stop', unit
-  startUnit: (unit) -> _controlUnit 'start', unit
-  destroyUnit: (unit) -> _controlUnit 'destroy', unit
+  stopUnit: (unit) -> controlUnit 'stop', unit
+  startUnit: (unit) -> controlUnit 'start', unit
+  destroyUnit: (unit) -> controlUnit 'destroy', unit
   submitUnit: (name, code, image) -> 
-    if image then code = _generateUnitCode name, image #ignore unit code if docker image is provided
-    Fleet.ssh "\"echo '#{code}' > #{name} && fleetctl submit #{name}\"", _refreshUnitList
+    if image then code = generateUnitCode name, image #ignore unit code if docker image is provided
+    ssh "\"echo '#{code}' > #{name} && fleetctl submit #{name}\"", refreshUnitList
       
-_controlUnit = (cmd, unit) -> 
-    Fleet.fleetctl "#{cmd} #{unit}", _refreshUnitList
+controlUnit = (cmd, unit) -> 
+  fleetctl "#{cmd} #{unit}", refreshUnitList
 
-_refreshUnitList = Meteor.bindEnvironment (error, stdout, stderr) -> 
-    console.log error, stdout, stderr
-    Fleet.listUnits()
+refreshUnitList = Meteor.bindEnvironment (error, stdout, stderr) -> 
+  Fleet.listUnits()
+  if error then throw new Meteor.Error(500, error.reason)
       
-_resultSplitter = (stdout, f) -> _.map stdout.trim().split('\n'), (line) -> f line.trim().split(/\t+/)
+resultSplitter = (stdout, f) -> _.map stdout.trim().split('\n'), (line) -> f line.trim().split(/\t+/)
     
-_updateCollection = (collection, data, key) ->
+updateCollection = (collection, data, key) ->
   key = if key then key else 'id'
   opts = {}
   opts[key] = {$nin: _.pluck(data, key)}
@@ -41,7 +41,7 @@ _updateCollection = (collection, data, key) ->
     else
       collection.insert item
       
-_generateUnitCode = (unitName, dockerImage) -> """[Unit]
+generateUnitCode = (unitName, dockerImage) -> """[Unit]
 Description=Automatically generated unit from #{dockerImage}
 Requires=docker.service
 
