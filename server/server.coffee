@@ -25,6 +25,7 @@ Meteor.methods
   stopUnit: Fleet.stopUnit
   destroyUnit: Fleet.destroyUnit
   submitUnit: Fleet.submitUnit
+  getUnitSource: Fleet.getUnitSource
 
 _refresh = ->
   Docker.loadRegistry()

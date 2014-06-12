@@ -10,7 +10,7 @@ fleetctl = (cmd, callback) -> ssh "fleetctl #{cmd}", callback
   listUnits: ->
     fleetctl 'list-units --full --no-legend', Meteor.bindEnvironment (error, stdout, stderr) -> 
       updateCollection Units, resultSplitter( stdout, (m) -> 
-        {unit: m[0], load: m[1], active: m[2], sub: m[3], description: m[4], machine: m[5]})
+        {unit: m[0], state: m[1], load: m[2], active: m[3], sub: m[4], description: m[5], machine: m[6]})
       , 'unit'
       
   stopUnit: (unit) -> controlUnit 'stop', unit
@@ -18,12 +18,14 @@ fleetctl = (cmd, callback) -> ssh "fleetctl #{cmd}", callback
   destroyUnit: (unit) -> controlUnit 'destroy', unit
   submitUnit: (name, code, image) -> 
     if image then code = generateUnitCode name, image #ignore unit code if docker image is provided
-    ssh "\"echo '#{code}' > #{name} && fleetctl submit #{name}\"", refreshUnitList
+    ssh "\"echo \\\"#{code}\\\" > #{name} && fleetctl submit #{name}\"", refreshUnitList
+  getUnitSource: (name) -> fleetctl "cat #{name}", Meteor.bindEnvironment (error, stdout, stderr) -> 
+    Units.update {unit: name}, {$set: {source: stdout}}
       
-controlUnit = (cmd, unit) -> 
-  fleetctl "#{cmd} #{unit}", refreshUnitList
+controlUnit = (cmd, unit) -> fleetctl "#{cmd} #{unit}", refreshUnitList
 
 refreshUnitList = Meteor.bindEnvironment (error, stdout, stderr) -> 
+  console.log error, stdout, stderr
   Fleet.listUnits()
   if error then throw new Meteor.Error(500, error.reason)
       
