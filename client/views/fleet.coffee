@@ -3,7 +3,7 @@ Template.fleet.rendered = ->
     e.preventDefault()
     $(@).tab('show')
 
-Template.fleet.isActive = -> @active != null && ~@active.indexOf('active')
+Template.fleet.isActive = -> @active != null && @active.toLowerCase() == 'active'
 
 Template.fleet.events =
   'click .startUnit': -> Meteor.call 'startUnit', @unit

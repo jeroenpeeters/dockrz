@@ -30,7 +30,7 @@ refreshUnitList = Meteor.bindEnvironment (error, stdout, stderr) ->
   if error then throw new Meteor.Error(500, error.reason)
       
 resultSplitter = (stdout, f) -> _.map stdout.trim().split('\n'), (line) -> f line.trim().split(/\t+/)
-    
+
 updateCollection = (collection, data, key) ->
   key = if key then key else 'id'
   opts = {}
@@ -48,7 +48,9 @@ Description=Automatically generated unit from #{dockerImage}
 Requires=docker.service
 
 [Service]
-ExecStart=/usr/bin/docker run --name #{unitName}%i -P #{dockerImage}
-ExecStop=/usr/bin/docker stop #{unitName}%i
-ExecStopPost=/usr/bin/docker rm #{unitName}%i
+ExecStart=/usr/bin/docker run --name %n -P #{dockerImage}
+ExecStartPost=/usr/bin/etcdctl set /%n/host $(fleetctl list-units | grep %n | tr '/' '\n' | tail -1)
+
+ExecStop=/usr/bin/docker stop %n
+ExecStopPost=/usr/bin/docker rm %n
 """
