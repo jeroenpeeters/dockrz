@@ -18,7 +18,8 @@ fleetctl = (cmd, callback) -> ssh "fleetctl #{cmd}", callback
   destroyUnit: (unit) -> controlUnit 'destroy', unit
   submitUnit: (name, code, image) -> 
     if image then code = generateUnitCode name, image #ignore unit code if docker image is provided
-    cmd = "\"echo \\\"#{code.replace(/\"/g, '\\\\\\\"')}\\\" > #{name} && /usr/bin/fleetctl submit #{name}\""
+    #escape surrounding double quotes and $ to prevent immediate execution
+    cmd = "\"echo -E \\\"#{code.replace(/\"/g, '\\\\\\\"').replace(/\$/g, '\\\\\\$')}\\\" > #{name} && /usr/bin/fleetctl submit #{name}\""
     ssh cmd, refreshUnitList
   getUnitSource: (name) -> fleetctl "cat #{name}", Meteor.bindEnvironment (error, stdout, stderr) -> 
     Units.update {unit: name}, {$set: {source: stdout}}
