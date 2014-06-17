@@ -1,16 +1,16 @@
 body {
-  padding-top:4em;
+    padding-top:4em;
 }
 .page {
-  padding:2em;
+    padding:2em;
 }
 .tag {
-  display:inline-block;
-  padding:0.2em;
+    display:inline-block;
+    padding:0.2em;
 }
 
 .container {
-  padding:0.2em;
+    padding:0.2em;
 }
 
 .alert {

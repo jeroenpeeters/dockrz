@@ -3,6 +3,7 @@
         <div class="navbar-header"><a class="navbar-brand" style="padding:0 1em 0 1em" href="{{pathFor 'home'}}"><img src="/logo-block.png" style="width:2.5em;"/></a></div>
         <ul class="nav navbar-nav">
             <li {{activeFleet}}><a href="{{pathFor 'fleet'}}">Fleet</a></li>
+            <li {{activeUnitTemplates}}><a href="{{pathFor 'unitTemplates'}}">Unit templates</a></li>
             <li {{activeRegistry}}><a href="{{pathFor 'registry'}}">Registry</a></li>
             <li {{activeImages}}><a href="{{pathFor 'images'}}">Images ({{numImages}})</a></li>
             <li {{activeContainers}}><a href="{{pathFor 'containers'}}">Containers ({{numContainers}})</a></li>

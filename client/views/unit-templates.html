@@ -1,0 +1,28 @@
+<template name="unitTemplates">
+    <div class="page">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="height:4em;">
+                <strong>Unit templates</strong>                
+                <button class="pull-right btn btn-default" id="addUnitTemplate"><span class="glyphicon glyphicon-plus"></span> new template</button>                    
+            </div>
+            <div class="panel-body row" style="padding-left:2em;">
+                <div>
+                    <div class="list-group col-md-2" id="unit-templates">
+                        {{#each templates}}
+                        <a href="#" class="list-group-item unit-template {{active}}">
+                            {{name}}
+                            <span class="pull-right glyphicon glyphicon-remove remove-template"></span>
+                        </a>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    {{#with selectedTemplate}}
+                    <input type="text" class="form-control" id="templateName" value="{{name}}"/>
+                    <textarea rows="20" class="form-control" id="templateCode">{{source}}</textarea>
+                    {{/with}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

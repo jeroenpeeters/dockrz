@@ -7,6 +7,8 @@ Session.set 'containerFilter', ''
 Meteor.subscribe 'registry'
 Meteor.subscribe 'machines'
 Meteor.subscribe 'units'
+Meteor.subscribe 'templates'
+
 Deps.autorun ->
   Meteor.subscribe 'containers', Session.get('dockerEndpoint')
   Meteor.subscribe 'images', Session.get('dockerEndpoint')
@@ -58,10 +60,23 @@ Router.map ->
   @route 'fleet',
     path: '/fleet'
     data:
-      machines: Machines.find()
-      units: Units.find()
+      machines: -> Machines.find()
+      units: -> Units.find()
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
       activeFleet: class:"active"
+      docker:
+        endpoints: settings.docker.endpoints
+
+  @route 'unitTemplates',
+    path: '/unit-templates'
+    data:
+      templates: -> UnitTemplates.find {}, {sort: {name:1}}
+      selectedTemplate: -> 
+        Meteor.subscribe 'template', Session.get('selectedUnitTemplateId')
+        UnitTemplates.findOne _id: Session.get('selectedUnitTemplateId')
+      numContainers: -> Containers.find().count()
+      numImages: -> Images.find().count()
+      activeUnitTemplates: class:"active"
       docker:
         endpoints: settings.docker.endpoints
