@@ -26,50 +26,58 @@ Router.map ->
         endpoints: settings.docker.endpoints
 
   @route 'registry',
-    path: '/registry'
+    path: '/docker/registry'
     data:
       registry: -> Registry.find $or: [{name: {$regex: "#{Session.get('registryFilter')}"}}]
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
-      activeRegistry: class:"active"
+      activeDocker: class:"active"
+      activeRegistry: 'active'
+      subMenu: Template.dockerMenu
       docker:
         endpoints: settings.docker.endpoints
 
   @route 'images',
-    path: '/images'
+    path: '/docker/images'
     data:
       imageFilter: -> Session.get 'imageFilter'
       images: -> Images.find $or: [{RepoTags: {$regex: "#{Session.get('imageFilter')}"}}, {Id: {$regex: "#{Session.get('imageFilter')}"}}]
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
-      activeImages: class:"active"
+      activeDocker: class:"active"
+      activeImages: 'active'
+      subMenu: Template.dockerMenu
       docker:
         endpoints: settings.docker.endpoints
 
   @route 'containers',
-    path: '/containers'
+    path: '/docker/containers'
     data:
       containerFilter: -> Session.get 'containerFilter'
       containers: -> Containers.find $or: [{Names: {$regex: "#{Session.get('containerFilter')}"}}, {Image: {$regex: "#{Session.get('containerFilter')}"}}]
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
-      activeContainers: class:"active"
+      activeDocker: class:"active"
+      activeContainers: 'active'
+      subMenu: Template.dockerMenu
       docker:
         endpoints: settings.docker.endpoints
 
   @route 'fleet',
-    path: '/fleet'
+    path: '/fleet/units'
     data:
       machines: -> Machines.find()
       units: -> Units.find()
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
       activeFleet: class:"active"
+      activeUnits: 'active'
+      subMenu: Template.fleetMenu
       docker:
         endpoints: settings.docker.endpoints
 
   @route 'unitTemplates',
-    path: '/unit-templates'
+    path: '/fleet/unit-templates'
     data:
       templates: -> UnitTemplates.find {}, {sort: {name:1}}
       selectedTemplate: ->
@@ -77,6 +85,8 @@ Router.map ->
         UnitTemplates.findOne _id: Session.get('selectedUnitTemplateId')
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
-      activeUnitTemplates: class:"active"
+      activeFleet: class:"active"
+      activeUnitTemplates: 'active'
+      subMenu: Template.fleetMenu
       docker:
         endpoints: settings.docker.endpoints

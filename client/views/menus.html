@@ -1,0 +1,20 @@
+<template name="fleetMenu">
+    <li class="{{activeUnits}}"><a href="{{pathFor 'fleet'}}">Units</a></li>
+    <li class="{{activeUnitTemplates}}"><a href="{{pathFor 'unitTemplates'}}">Templates</a></li>
+</template>
+
+<template name="dockerMenu">
+    <li class="{{activeRegistry}}"><a href="{{pathFor 'registry'}}">Registry</a></li>
+    <li class="{{activeImages}}"><a href="{{pathFor 'images'}}">Images ({{numImages}})</a></li>
+    <li class="{{activeContainers}}"><a href="{{pathFor 'containers'}}">Containers ({{numContainers}})</a></li>
+
+    <form class="navbar-form navbar-right" style="margin:0 1em 0 0;">
+        {{#if docker.endpoints}}
+        <select id="dockerEndpoint" class="form-control">
+            {{#each docker.endpoints}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+        {{/if}}
+    </form>
+</template>
