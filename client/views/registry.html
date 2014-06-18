@@ -1,7 +1,10 @@
 <template name="registry">
     <div class="page">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Images</strong></div>
+            <div class="panel-heading">
+                <strong>Images</strong>
+                {{> filter sessionVar='registryFilter' placeholder='Type here to filter images'}}
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>

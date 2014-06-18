@@ -28,7 +28,7 @@ Router.map ->
   @route 'registry',
     path: '/registry'
     data:
-      registry: Registry.find()
+      registry: -> Registry.find $or: [{name: {$regex: "#{Session.get('registryFilter')}"}}]
       numContainers: -> Containers.find().count()
       numImages: -> Images.find().count()
       activeRegistry: class:"active"
@@ -72,7 +72,7 @@ Router.map ->
     path: '/unit-templates'
     data:
       templates: -> UnitTemplates.find {}, {sort: {name:1}}
-      selectedTemplate: -> 
+      selectedTemplate: ->
         Meteor.subscribe 'template', Session.get('selectedUnitTemplateId')
         UnitTemplates.findOne _id: Session.get('selectedUnitTemplateId')
       numContainers: -> Containers.find().count()
