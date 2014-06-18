@@ -10,3 +10,5 @@ bootstrap-3
 http
 reactive-dict
 flash-messages
+collection-hooks
+moment

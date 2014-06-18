@@ -7,3 +7,7 @@ UnitTemplates.allow {
   update: (userId, doc, fields, modifier) -> true
   remove: (userId, doc) -> true
 }
+
+UnitTemplates.before.update (userId, doc, fieldNames, modifier, options) ->
+  modifier.$set = modifier.$set || {};
+  modifier.$set.modifiedAt = Date.now();

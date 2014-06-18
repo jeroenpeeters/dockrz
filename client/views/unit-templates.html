@@ -2,14 +2,14 @@
     <div class="page">
         <div class="panel panel-default">
             <div class="panel-heading" style="height:4em;">
-                <strong>Unit templates</strong>                
-                <button class="pull-right btn btn-default" id="addUnitTemplate"><span class="glyphicon glyphicon-plus"></span> new template</button>                    
+                <strong>Unit templates</strong>
+                <button class="pull-right btn btn-default" id="addUnitTemplate"><span class="glyphicon glyphicon-plus"></span> new template</button>
             </div>
             <div class="panel-body row" style="padding-left:2em;">
                 <div>
                     <div class="list-group col-md-2" id="unit-templates">
                         {{#each templates}}
-                        <a href="#" class="list-group-item unit-template {{active}}">
+                        <a href="#" class="list-group-item unit-template {{active}}" style="min-height:3em;">
                             {{name}}
                             <span class="pull-right glyphicon glyphicon-remove remove-template"></span>
                         </a>
@@ -20,6 +20,7 @@
                     {{#with selectedTemplate}}
                     <input type="text" class="form-control" id="templateName" value="{{name}}"/>
                     <textarea rows="20" class="form-control" id="templateCode">{{source}}</textarea>
+                    Last changed: {{lastChanged}}
                     {{/with}}
                 </div>
             </div>
