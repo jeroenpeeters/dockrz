@@ -12,3 +12,4 @@ reactive-dict
 flash-messages
 collection-hooks
 moment
+streams

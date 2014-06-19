@@ -6,7 +6,8 @@
       "bootstrap-3": {},
       "flash-messages": {},
       "collection-hooks": {},
-      "moment": {}
+      "moment": {},
+      "streams": {}
     },
     "packages": {
       "iron-router": {
@@ -33,6 +34,11 @@
         "git": "https://github.com/acreeger/meteor-moment.git",
         "tag": "v2.6.0",
         "commit": "26156df681750fd6e6ed77043eef32b6653ebbdf"
+      },
+      "streams": {
+        "git": "https://github.com/arunoda/meteor-streams.git",
+        "tag": "v0.1.17",
+        "commit": "9fcbbc9b7bf542827babc92089c19e730892a22f"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

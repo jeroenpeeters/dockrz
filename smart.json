@@ -4,6 +4,7 @@
     "bootstrap-3": {},
     "flash-messages": {},
     "collection-hooks": {},
-    "moment": {}
+    "moment": {},
+    "streams": {}
   }
 }

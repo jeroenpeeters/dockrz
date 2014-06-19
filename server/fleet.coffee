@@ -29,7 +29,7 @@ controlUnit = (cmd, unit) -> fleetctl "#{cmd} #{unit}", refreshUnitList
 refreshUnitList = Meteor.bindEnvironment (error, stdout, stderr) -> 
   console.log error, stdout, stderr
   Fleet.listUnits()
-  if error then throw new Meteor.Error(500, error.reason)
+  if error then messages.emit('error', error.reason)
       
 resultSplitter = (stdout, f) -> _.map stdout.trim().split('\n'), (line) -> f line.trim().split(/\t+/)
 
