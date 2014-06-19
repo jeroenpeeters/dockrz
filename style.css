@@ -20,7 +20,6 @@ body {
 
 .nav-submenu {
   margin-left:5.5em;
-  border-bottom:1px solid #e7e7e7;
 }
 
 nav-submenu li a {
@@ -42,4 +41,8 @@ nav-submenu li a {
 .nav-submenu li.active a:hover {
   color: #777;
   background-color: #fff;
+}
+
+#templateName {
+  margin-bottom: .5em;
 }
