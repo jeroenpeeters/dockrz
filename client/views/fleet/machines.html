@@ -1,0 +1,25 @@
+<template name="machines">
+    <div class="page">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Machines</strong></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>IP</th>
+                        <th>Meta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each machines}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{ip}}</td>
+                        <td>{{meta}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>

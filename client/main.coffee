@@ -3,6 +3,7 @@ document.title = 'Dockrz'
 Session.set 'dockerEndpoint', settings.docker.endpoints[0]
 Session.set 'imageFilter', ''
 Session.set 'containerFilter', ''
+Session.set 'registryFilter', ''
 
 Meteor.subscribe 'registry'
 Meteor.subscribe 'machines'
@@ -66,15 +67,10 @@ Router.map ->
   @route 'fleet',
     path: '/fleet/units'
     data:
-      machines: -> Machines.find()
       units: -> Units.find()
-      numContainers: -> Containers.find().count()
-      numImages: -> Images.find().count()
       activeFleet: class:"active"
       activeUnits: 'active'
       subMenu: Template.fleetMenu
-      docker:
-        endpoints: settings.docker.endpoints
 
   @route 'unitTemplates',
     path: '/fleet/unit-templates'
@@ -83,10 +79,14 @@ Router.map ->
       selectedTemplate: ->
         Meteor.subscribe 'template', Session.get('selectedUnitTemplateId')
         UnitTemplates.findOne _id: Session.get('selectedUnitTemplateId')
-      numContainers: -> Containers.find().count()
-      numImages: -> Images.find().count()
       activeFleet: class:"active"
       activeUnitTemplates: 'active'
       subMenu: Template.fleetMenu
-      docker:
-        endpoints: settings.docker.endpoints
+
+  @route 'machines',
+    path: '/fleet/machines'
+    data:
+      machines: -> Machines.find()
+      activeFleet: class:"active"
+      activeMachines: 'active'
+      subMenu: Template.fleetMenu
