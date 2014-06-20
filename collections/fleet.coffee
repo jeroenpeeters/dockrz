@@ -8,6 +8,12 @@ UnitTemplates.allow {
   remove: (userId, doc) -> true
 }
 
-UnitTemplates.before.update (userId, doc, fieldNames, modifier, options) ->
-  modifier.$set = modifier.$set || {};
-  modifier.$set.modifiedAt = Date.now();
+if Meteor.isServer
+  UnitTemplates.after.insert (userId, doc, fieldNames, modifier, options) ->
+    Activity.insert description: 'Added new unit template'
+  UnitTemplates.after.remove (userId, doc, fieldNames, modifier, options) ->
+    Activity.insert description: "Unit template '#{doc.name}' removed"
+
+  UnitTemplates.before.update (userId, doc, fieldNames, modifier, options) ->
+    modifier.$set = modifier.$set || {};
+    modifier.$set.modifiedAt = Date.now();

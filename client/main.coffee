@@ -9,6 +9,7 @@ Meteor.subscribe 'registry'
 Meteor.subscribe 'machines'
 Meteor.subscribe 'units'
 Meteor.subscribe 'templates'
+Meteor.subscribe 'activities'
 
 Deps.autorun ->
   Meteor.subscribe 'containers', Session.get('dockerEndpoint')

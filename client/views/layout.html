@@ -1,19 +1,32 @@
 <template name="layout">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="navbar-header"><a class="navbar-brand" style="padding:0 1em 0 1em" href="{{pathFor 'home'}}"><img src="/logo-block.png" style="width:2.5em;"/></a></div>
-        <ul class="nav navbar-nav">
-            <li {{activeFleet}}><a href="{{pathFor 'fleet'}}"><img src="/coreos.png" style="height:1.5em" /> Fleet</a></li>
-            <li {{activeDocker}}><a href="{{pathFor 'registry'}}"><img src="/docker.png" style="height:1.5em" /> Docker</a></li>
-        </ul>
-    </nav>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navbar-header"><a class="navbar-brand" style="padding:0 1em 0 1em" href="{{pathFor 'home'}}"><img src="/logo-block.png" style="width:2.5em;"/></a></div>
+            <ul class="nav navbar-nav">
+                <li {{activeFleet}}><a href="{{pathFor 'fleet'}}"><img src="/coreos.png" style="height:1.5em" /> Fleet</a></li>
+                <li {{activeDocker}}><a href="{{pathFor 'registry'}}"><img src="/docker.png" style="height:1.5em" /> Docker</a></li>
+            </ul>
+             <ul class="nav navbar-nav navbar-right">
+                 <li><a id="menu-toggle" href="#"><span class="glyphicon glyphicon-list-alt"></span></a></li>
+            </ul>
+        </nav>
 
-    {{#if subMenu}}
-    <ul class="nav nav-pills nav-submenu">
-        {{> subMenu}}
-    </ul>
-    {{/if}}
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                {{#each activities}}<li><span class="activity-description">{{description}}</span><span class="activity-timestamp">{{formatTime}}</span></li>{{/each}}
+            </ul>
+        </div>
 
-    {{> flashMessages}}
+        <div id="page-content-wrapper">
+            {{#if subMenu}}
+            <ul class="nav nav-pills nav-submenu">
+                {{> subMenu}}
+            </ul>
+            {{/if}}
 
-    {{> yield}}
+            {{> flashMessages}}
+
+            {{> yield}}
+        </div>
+    </div>
 </template>

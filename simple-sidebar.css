@@ -1,0 +1,106 @@
+#wrapper {
+  height:100%;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  margin-right: -20%;
+  right: 20%;
+  width: 20%;
+  position: fixed;
+  height: inherit;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+
+#page-content-wrapper {
+  width: 100%;
+}
+
+.sidebar-nav {
+  position: absolute;
+  background-color:#f9f9f9;
+  top: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width:100%;
+  height:inherit;
+}
+
+.sidebar-nav li {
+  line-height: 120%;
+  padding:1em 1em 1em 1em;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  line-height: 60px;
+  font-size: 18px;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+  background: none;
+}
+
+.content-header {
+  height: 65px;
+  line-height: 65px;
+}
+
+.content-header h1 {
+  margin: 0;
+  margin-left: 20px;
+  line-height: 65px;
+  display: inline-block;
+}
+
+.inset {
+  padding: 20px;
+}
+
+#wrapper {
+  padding-left: 0;
+}
+
+#sidebar-wrapper {
+  right: 0;
+}
+
+#wrapper.active {
+  position: relative;
+}
+
+#wrapper.active #page-content-wrapper {
+  width:80%;
+}
+
+#wrapper.active #sidebar-wrapper {
+  right: 20%;
+  width: 20%;
+  transition: all 0.4s ease 0s;
+}
+
+#menu-toggle {
+  display: inline-block;
+}
+
+.inset {
+  padding: 15px;
+}

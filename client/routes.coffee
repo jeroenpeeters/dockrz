@@ -1,71 +1,75 @@
+extend = (src, dest) -> _.extend dest, src
+
 Meteor.startup ->
-  Router.configure
+
+  BaseController = RouteController.extend
     layoutTemplate: 'layout'
+    data:
+      activities: -> Activity.find {}, {sort: {time: -1}}
+
+  DockerController = BaseController.extend
+    data: extend BaseController.prototype.data,
+      subMenu: Template.dockerMenu
+      activeDocker: class:"active"
+      numContainers: -> Containers.find().count()
+      numImages: -> Images.find().count()
+      docker:
+        endpoints: settings.docker.endpoints
+
+
+  FleetController = BaseController.extend
+    data: extend BaseController.prototype.data,
+      subMenu: Template.fleetMenu
+      activeFleet: class:"active"
 
   Router.map ->
-    @route 'home', path: '/'
+    @route 'home',
+      path: '/'
+      controller: BaseController
 
     @route 'registry',
       path: '/docker/registry'
-      data:
-        registry: -> Registry.find $or: [{name: {$regex: "#{Session.get('registryFilter')}"}}]
-        numContainers: -> Containers.find().count()
-        numImages: -> Images.find().count()
-        activeDocker: class:"active"
-        activeRegistry: 'active'
-        subMenu: Template.dockerMenu
-        docker:
-          endpoints: settings.docker.endpoints
+      controller: DockerController.extend
+        data: extend DockerController.prototype.data,
+          registry: -> Registry.find $or: [{name: {$regex: "#{Session.get('registryFilter')}"}}]
+          activeRegistry: 'active'
 
     @route 'images',
       path: '/docker/images'
-      data:
-        imageFilter: -> Session.get 'imageFilter'
-        images: -> Images.find $or: [{RepoTags: {$regex: "#{Session.get('imageFilter')}"}}, {Id: {$regex: "#{Session.get('imageFilter')}"}}]
-        numContainers: -> Containers.find().count()
-        numImages: -> Images.find().count()
-        activeDocker: class:"active"
-        activeImages: 'active'
-        subMenu: Template.dockerMenu
-        docker:
-          endpoints: settings.docker.endpoints
+      controller: DockerController.extend
+        data: extend DockerController.prototype.data,
+          imageFilter: -> Session.get 'imageFilter'
+          images: -> Images.find $or: [{RepoTags: {$regex: "#{Session.get('imageFilter')}"}}, {Id: {$regex: "#{Session.get('imageFilter')}"}}]
+          activeImages: 'active'
 
     @route 'containers',
       path: '/docker/containers'
-      data:
-        containerFilter: -> Session.get 'containerFilter'
-        containers: -> Containers.find $or: [{Names: {$regex: "#{Session.get('containerFilter')}"}}, {Image: {$regex: "#{Session.get('containerFilter')}"}}]
-        numContainers: -> Containers.find().count()
-        numImages: -> Images.find().count()
-        activeDocker: class:"active"
-        activeContainers: 'active'
-        subMenu: Template.dockerMenu
-        docker:
-          endpoints: settings.docker.endpoints
+      controller: DockerController.extend
+        data: extend DockerController.prototype.data,
+          containerFilter: -> Session.get 'containerFilter'
+          containers: -> Containers.find $or: [{Names: {$regex: "#{Session.get('containerFilter')}"}}, {Image: {$regex: "#{Session.get('containerFilter')}"}}]
+          activeContainers: 'active'
 
     @route 'fleet',
       path: '/fleet/units'
-      data:
-        units: -> Units.find()
-        activeFleet: class:"active"
-        activeUnits: 'active'
-        subMenu: Template.fleetMenu
+      controller: FleetController.extend
+        data: extend FleetController.prototype.data,
+          units: -> Units.find()
+          activeUnits: 'active'
 
     @route 'unitTemplates',
       path: '/fleet/unit-templates'
-      data:
-        templates: -> UnitTemplates.find {}, {sort: {name:1}}
-        selectedTemplate: ->
-          Meteor.subscribe 'template', Session.get('selectedUnitTemplateId')
-          UnitTemplates.findOne _id: Session.get('selectedUnitTemplateId')
-        activeFleet: class:"active"
-        activeUnitTemplates: 'active'
-        subMenu: Template.fleetMenu
+      controller:  FleetController.extend
+        data: extend FleetController.prototype.data,
+          templates: -> UnitTemplates.find {}, {sort: {name:1}}
+          selectedTemplate: ->
+            Meteor.subscribe 'template', Session.get('selectedUnitTemplateId')
+            UnitTemplates.findOne _id: Session.get('selectedUnitTemplateId')
+          activeUnitTemplates: 'active'
 
     @route 'machines',
       path: '/fleet/machines'
-      data:
-        machines: -> Machines.find()
-        activeFleet: class:"active"
-        activeMachines: 'active'
-        subMenu: Template.fleetMenu
+      controller:  FleetController.extend
+        data: extend FleetController.prototype.data,
+          machines: -> Machines.find()
+          activeMachines: 'active'
