@@ -18,3 +18,7 @@ Template.fleet.events =
     e.preventDefault()
 
   'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
+  'change #template-name': (e) -> 
+    templateName = e.target.options[e.target.selectedIndex].text
+    console.log templateName
+    $('#unitCode').val UnitTemplates.findOne(name: templateName).source

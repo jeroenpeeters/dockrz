@@ -14,7 +14,7 @@ Meteor.publish 'containers', (endpoint) -> Containers.find {Endpoint: endpoint}
 Meteor.publish 'images', (endpoint) -> Images.find {Endpoint: endpoint}
 Meteor.publish 'machines', () -> Machines.find {}
 Meteor.publish 'units', () -> Units.find {}
-Meteor.publish 'templates', () -> UnitTemplates.find {}, {fields: {name: 1}}
+Meteor.publish 'templates', () -> UnitTemplates.find {}
 Meteor.publish 'template', (id) -> UnitTemplates.find {_id: id}
 Meteor.publish 'activities', (id) -> Activity.find {}
 

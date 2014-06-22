@@ -55,6 +55,7 @@ Meteor.startup ->
       controller: FleetController.extend
         data: extend FleetController.prototype.data,
           units: -> Units.find()
+          unitTemplates: -> UnitTemplates.find {}, {sort: {name:1}}
           activeUnits: 'active'
 
     @route 'unitTemplates',
