@@ -20,5 +20,6 @@ Template.fleet.events =
   'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
   'change #template-name': (e) -> 
     templateName = e.target.options[e.target.selectedIndex].text
-    console.log templateName
-    $('#unitCode').val UnitTemplates.findOne(name: templateName).source
+    templateId = UnitTemplates.findOne(name: templateName)._id
+    Meteor.subscribe 'template', templateId, ->
+        $('#unitCode').val UnitTemplates.findOne(_id: templateId).source
