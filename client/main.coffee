@@ -4,6 +4,7 @@ Session.set 'dockerEndpoint', settings.docker.endpoints[0]
 Session.set 'imageFilter', ''
 Session.set 'containerFilter', ''
 Session.set 'registryFilter', ''
+Session.set 'unitFilter', ''
 
 Meteor.subscribe 'registry'
 Meteor.subscribe 'machines'

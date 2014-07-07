@@ -3,6 +3,9 @@
         <div class="panel panel-default">
             <div class="panel-heading" style="height:4em;"><strong>Units</strong>
                 <div class="btn-group pull-right">
+                    <div class="pull-left" style="margin-right:1em; margin-top:0.5em;">
+                        {{> filter sessionVar='unitFilter' placeholder='Type here to filter units'}}
+                    </div>
                     <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Submit new unit <strong class="caret"></strong></button>
                     <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em; width:50em;">
                         <div class="form-group">

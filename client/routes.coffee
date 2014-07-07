@@ -31,7 +31,7 @@ Meteor.startup ->
       path: '/docker/registry'
       controller: DockerController.extend
         data: extend DockerController.prototype.data,
-          registry: -> Registry.find $or: [{name: {$regex: "#{Session.get('registryFilter')}"}}]
+          registry: -> Registry.find {name: {$regex: "#{Session.get('registryFilter')}"}}
           activeRegistry: 'active'
 
     @route 'images',
@@ -54,7 +54,7 @@ Meteor.startup ->
       path: '/fleet/units'
       controller: FleetController.extend
         data: extend FleetController.prototype.data,
-          units: -> Units.find()
+          units: -> Units.find {unit: {$regex: "#{Session.get('unitFilter')}"}}
           unitTemplates: -> UnitTemplates.find {}, {sort: {name:1}}
           activeUnits: 'active'
 
