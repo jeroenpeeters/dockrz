@@ -20,4 +20,4 @@
       port:     '5000'
 
   coreos:
-    ssh: 'ssh rni@docker-cluster.rni.org -p 443 '
+    ssh: 'ssh rni@coreos.rni.org '
