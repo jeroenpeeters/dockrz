@@ -20,4 +20,5 @@
       port:     '5000'
 
   coreos:
-    ssh: 'ssh rni@coreos.rni.org '
+    ssh: 'ssh core@coreos.rni.org '  
+    etcd: 'http://coreos.rni.org:4001/v2/keys'
