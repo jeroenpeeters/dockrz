@@ -30,7 +30,7 @@ body {
     margin-left:5.5em;
 }
 
-nav-submenu li a {
+.nav-submenu li a {
     background-color: #fff;
 }
 .nav-submenu li a:hover {
@@ -59,13 +59,21 @@ nav-submenu li a {
     margin-top: .4em;
 }
 
-.activity-description {
+.activity .infobar {
+    margin-top: 0.5em;
+}
+.activity .description {
     font-size: 90%;
 }
-.activity-timestamp {
+.activity .timestamp {
     font-size: 80%;
+    float: left;
     display: block;
     font-weight: bold;
+}
+.activity .glyphicon {
+    color: #ddd;
+    float: right;
 }
 
 .glow {
@@ -73,4 +81,8 @@ nav-submenu li a {
         -1px 1px 1px  pink,
         1px 1px 1px  pink,
         1px -1px 1px  pink;
+}
+
+._jsPlumb_connector {
+  z-index: 11;
 }

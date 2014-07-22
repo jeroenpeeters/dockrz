@@ -13,7 +13,9 @@
 
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                {{#each activities}}<li><span class="activity-description">{{description}}</span><span class="activity-timestamp">{{formatTime}}</span></li>{{/each}}
+                {{#each activities}}
+                <li class="activity">{{> activityTemplate}}<div class="infobar"><span class="timestamp">{{formatTime}}</span><span class="glyphicon {{glyphicon}}"></span></div></li>
+                {{/each}}
             </ul>
         </div>
 
