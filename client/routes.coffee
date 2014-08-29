@@ -22,6 +22,10 @@ Meteor.startup ->
       subMenu: Template.fleetMenu
       activeFleet: class:"active"
 
+  ProjectsController = BaseController.extend
+    data: extend BaseController.prototype.data,
+      activeProjects: class:"active"
+
   Router.map ->
     @route 'home',
       path: '/'
@@ -74,3 +78,12 @@ Meteor.startup ->
         data: extend FleetController.prototype.data,
           machines: -> Machines.find()
           activeMachines: 'active'
+
+    @route 'projects',
+      path: '/projects/overview'
+      controller:  ProjectsController.extend
+        data: extend ProjectsController.prototype.data,
+          projects: -> Projects.find()
+          selectedProject: ->
+            Meteor.subscribe 'project', Session.get('selectedProjectId')
+            Projects.findOne _id: Session.get('selectedProjectId')
