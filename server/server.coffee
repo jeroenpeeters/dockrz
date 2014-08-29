@@ -17,6 +17,7 @@ Meteor.publish 'units', () -> Units.find {}
 Meteor.publish 'templates', () -> UnitTemplates.find {}, {fields: {name: 1}}
 Meteor.publish 'template', (id) -> UnitTemplates.find {_id: id}
 Meteor.publish 'activities', (id) -> Activity.find {}
+Meteor.publish 'projects', () -> Projects.find {}, {fields: {name: 1}}
 
 Meteor.methods
   startContainer: Docker.startContainer
