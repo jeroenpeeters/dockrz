@@ -3,11 +3,24 @@
         <div class="panel panel-default">
             <div class="panel-heading" style="height:4em;">
                 <strong>Projects</strong>
-                <button class="pull-right btn btn-default" id="addProject"><span class="glyphicon glyphicon-plus"></span> New project</button>
+
+                <div id="newProjectDropdown" class="btn-group pull-right">
+                    <button id="newProjetDropdownToggle" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-plus"></span> New Project
+                    </button>
+                    <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
+                        <div class="form-group" style="width:35em">
+                            <label>Project name</label>
+                            <input type="text" class="form-control" id="newProjectName" placeholder="Enter project name">
+                        </div>
+                        <button type="button" id="addProject" class="btn btn-primary">Ok</button>
+                    </form>
+                </div>
+
             </div>
             <div class="panel-body row" style="padding-left:2em;">
                 <div>
-                    <div class="list-group col-md-2" id="unit-templates">
+                    <div class="list-group col-md-2" id="projects">
                         {{#each projects}}
                         <a href="#" class="list-group-item project {{active}}" style="min-height:3em;">
                             {{name}}

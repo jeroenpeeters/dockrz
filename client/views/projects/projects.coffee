@@ -1,12 +1,14 @@
 Template.projects.events =
   'click .project': -> Session.set 'selectedProjectId', @_id
 
-  'click #addProject': ->
-    Session.set 'selectedProjectId', Projects.insert {name: "_ New Project"}
+  'click #addProject': (e, template) ->
+    Session.set 'selectedProjectId', Projects.insert name: template.find('#newProjectName').value
 
   'click .remove-project': -> Projects.remove _id: @_id
 
   'input #projectName': (e, template) -> Projects.update {_id: @_id}, {$set: {name: e.target.value}}
+
+  'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
 
   #'input #templateName': (e, template) -> UnitTemplates.update {_id: @_id}, {$set: {name: e.target.value}}
 

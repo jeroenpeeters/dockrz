@@ -24,7 +24,13 @@ Meteor.startup ->
 
   ProjectsController = BaseController.extend
     data: extend BaseController.prototype.data,
+      subMenu: Template.projectsMenu
       activeProjects: class:"active"
+
+  ApplicationsController = BaseController.extend
+    data: extend BaseController.prototype.data,
+      subMenu: Template.applicationsMenu
+      activeApplications: class:"active"
 
   Router.map ->
     @route 'home',
@@ -83,7 +89,17 @@ Meteor.startup ->
       path: '/projects/overview'
       controller:  ProjectsController.extend
         data: extend ProjectsController.prototype.data,
+          activeProjects: class:"active"
           projects: -> Projects.find()
           selectedProject: ->
             Meteor.subscribe 'project', Session.get('selectedProjectId')
             Projects.findOne _id: Session.get('selectedProjectId')
+
+    @route 'applications',
+      path: '/applications/overview'
+      controller:  ApplicationsController.extend
+        data: extend ApplicationsController.prototype.data,
+          applications: -> Applications.find()
+          selectedApplication: ->
+            Meteor.subscribe 'application', Session.get('selectedApplicationId')
+            Applications.findOne _id: Session.get('selectedApplicationId')

@@ -12,6 +12,7 @@ Meteor.subscribe 'units'
 Meteor.subscribe 'templates'
 Meteor.subscribe 'activities'
 Meteor.subscribe 'projects'
+Meteor.subscribe 'applications'
 
 Deps.autorun ->
   Meteor.subscribe 'containers', Session.get('dockerEndpoint')

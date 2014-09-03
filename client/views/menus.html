@@ -19,3 +19,11 @@
         {{/if}}
     </form>
 </template>
+
+<template name="projectsMenu">
+    <li class="{{activeProjects}}"><a href="{{pathFor 'projects'}}">Overview</a></li>
+</template>
+
+<template name="applicationsMenu">
+    <li class="{{activeApplications}}"><a href="{{pathFor 'applications'}}">Overview</a></li>
+</template>

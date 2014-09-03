@@ -1,4 +1,4 @@
-@Projects = new Meteor.Collection 'projects'
+@Projects  = new Meteor.Collection 'projects'
 
 Projects.allow {
   insert: (userId, doc) -> true
@@ -7,8 +7,5 @@ Projects.allow {
 }
 
 Activity.streamHook Projects
+CollectionUtils.setModifiedAtBeforeUpdate Projects
 
-if Meteor.isServer
-  Projects.before.update (userId, doc, fieldNames, modifier, options) ->
-    modifier.$set = modifier.$set || {};
-    modifier.$set.modifiedAt = Date.now();
