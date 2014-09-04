@@ -6,7 +6,9 @@ Template.layout.events =
 
 Template.layout.helpers
   formatTime: -> moment(@time).fromNow()
-  activityTemplate: -> Template["activity-#{@type}-#{@collection}"]
+  activityTemplate: ->
+    Template["activity-#{@type}-#{@collection}"] || Template["activity-#{@type}-default"]
+
   glyphicon: -> if @type == 'insert' then 'glyphicon-ok' else 'glyphicon-remove'
 
 Template.layout.rendered = ->

@@ -1,15 +1,20 @@
 Template.applications.events =
-  'click .application': -> Session.set 'selectedApplicationId', @_id
+  'click #addApplication': ->
+    Session.set 'selectedApplicationId', Applications.insert name: '_ Brand new application'
 
-  'click #addApplication': (e, template)->
-    Session.set 'selectedApplicationId', Applications.insert name: template.find('#appName').value
-
-  'click .remove-application': -> Applications.remove _id: @_id
-
-  'input #applicationName': (e, template) -> Applications.update {_id: @_id}, {$set: {name: e.target.value}}
-
-  'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
+  'input #applicationName': (e) -> Applications.update {_id: @_id}, {$set: {name: e.target.value}}
 
 Template.applications.helpers
-  active: -> if @_id == Session.get('selectedApplicationId') then "active" else ""
+  removeApplication: -> (id) -> Applications.remove _id: id
   lastChanged: -> moment(@modifiedAt).fromNow()
+
+Template.appDetails.rendered = -> @$("#templates").select2(tags:[])
+Template.appDetails.helpers
+  toString: (valueList) ->
+    Meteor.defer(-> @$("#templates").trigger('change'))
+    _.pluck(valueList, 'name').toString()
+
+Template.appDetails.events =
+  'change #templates': (e) ->
+    if e.removed then Applications.update {_id: Session.get('selectedApplicationId')}, {"$pull": {templates: {name: e.removed?.text}}}
+    if e.added then Applications.update {_id: Session.get('selectedApplicationId')}, {"$push": {templates: {name: e.added?.text}}}

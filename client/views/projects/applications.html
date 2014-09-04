@@ -5,40 +5,29 @@
                 <strong>Applications</strong>
 
                 <div id="newAppDropdown" class="btn-group pull-right">
-                    <button id="newAppDropdownToggle" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-plus"></span> New Application
+                    <button class="pull-right btn btn-default" id="addApplication"><span
+                            class="glyphicon glyphicon-plus"></span>
+                        New application
                     </button>
-                    <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
-                        <div class="form-group" style="width:35em">
-                            <!--p>Create a new </p>
-                            <hr /-->
-                            <label>Application name</label>
-                            <input type="text" class="form-control" id="appName" placeholder="Enter application name">
-                        </div>
-                        <button type="button" id="addApplication" class="btn btn-primary">Ok</button>
-                    </form>
                 </div>
-
             </div>
             <div class="panel-body row" style="padding-left:2em;">
-                <div>
-                    <div class="list-group col-md-2" id="applications">
-                        {{#each applications}}
-                        <a href="#" class="list-group-item application {{active}}" style="min-height:3em;">
-                            {{name}}
-                            <span class="pull-right glyphicon glyphicon-remove remove-application"></span>
-                        </a>
-                        {{/each}}
-
-                    </div>
+                <div class="col-md-2">
+                    {{> selectableList items=applications sessionVar='selectedApplicationId'
+                    removeItem=removeApplication}}
                 </div>
                 <div class="col-md-10">
                     {{#with selectedApplication}}
                     <input type="text" class="form-control" id="applicationName" value="{{name}}"/>
-                    Last changed: {{lastChanged}}
+                    {{> appDetails}}
                     {{/with}}
+                    Last changed: {{lastChanged}}
                 </div>
             </div>
         </div>
     </div>
+</template>
+
+<template name="appDetails">
+    <input id="templates" value="{{toString templates}}"/>
 </template>
