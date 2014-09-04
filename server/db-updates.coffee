@@ -1,4 +1,5 @@
 Meteor.startup ->
+  console.log "this should run only on the server"
   if Meteor.isServer
 
     # Run the database update scripts
