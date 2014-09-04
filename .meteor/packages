@@ -5,12 +5,12 @@
 
 standard-app-packages
 coffeescript
-bootstrap-3
+mizzao:bootstrap-3
 http
 reactive-dict
-flash-messages
-collection-hooks
-moment
-streams
+mrt:flash-messages
+matb33:collection-hooks
+mrt:moment
+lepozepo:streams
 iron:router
 
