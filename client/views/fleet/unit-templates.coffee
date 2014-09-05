@@ -1,6 +1,9 @@
 Template.unitTemplates.events =
-  'click #addUnitTemplate': ->
-    Session.set 'selectedUnitTemplateId', UnitTemplates.insert {name: '_ Brand new unit', source: 'Put unit code here'}
+  'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
+
+  'submit form': (e, template) ->
+    e.preventDefault()
+    Session.set 'selectedUnitTemplateId', UnitTemplates.insert(name: template.find('#newUnitTemplateName').value)
 
   'input #templateCode': (e) -> UnitTemplates.update {_id: @_id}, {$set: {source: e.target.value}}
 

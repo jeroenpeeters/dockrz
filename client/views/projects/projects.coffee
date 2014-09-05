@@ -1,17 +1,12 @@
 Template.projects.events =
-  'click .project': -> Session.set 'selectedProjectId', @_id
-
-  'click #addProject': (e, template) ->
-    Session.set 'selectedProjectId', Projects.insert name: template.find('#newProjectName').value
-
-  'click .remove-project': -> Projects.remove _id: @_id
-
-  'input #projectName': (e, template) -> Projects.update {_id: @_id}, {$set: {name: e.target.value}}
-
   'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
 
-  #'input #templateName': (e, template) -> UnitTemplates.update {_id: @_id}, {$set: {name: e.target.value}}
+  'submit form': (e, template) ->
+    e.preventDefault()
+    Session.set 'selectedProjectId', Projects.insert(name: template.find('#newProjectName').value)
+
+  'input #projectName': (e) -> Projects.update {_id: @_id}, {$set: {name: e.target.value}}
 
 Template.projects.helpers
-  active: -> if @_id == Session.get('selectedProjectId') then "active" else ""
+  removeProject: -> (id) -> Projects.remove _id: id
   lastChanged: -> moment(@modifiedAt).fromNow()

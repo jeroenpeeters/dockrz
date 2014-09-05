@@ -5,10 +5,18 @@
                 <strong>Applications</strong>
 
                 <div id="newAppDropdown" class="btn-group pull-right">
-                    <button class="pull-right btn btn-default" id="addApplication"><span
-                            class="glyphicon glyphicon-plus"></span>
-                        New application
+                    <button id="newApplicationDropdownToggle" type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-plus"></span> New Application
                     </button>
+                    <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
+                        <div class="form-group" style="width:35em">
+                            <label>Application name</label>
+                            <input type="text" class="form-control" id="newApplicationName"
+                                   placeholder="Enter application name">
+                        </div>
+                        <button type="submit" id="addApplication" class="btn btn-primary">Ok</button>
+                    </form>
                 </div>
             </div>
             <div class="panel-body row" style="padding-left:2em;">

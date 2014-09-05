@@ -1,9 +1,11 @@
 Template.applications.events =
-  'click #addApplication': ->
-    Session.set 'selectedApplicationId', Applications.insert name: '_ Brand new application'
+  'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
 
-  'input #applicationName': (e) ->
-    Applications.update {_id: @_id}, {$set: {name: e.target.value}}
+  'submit form': (e, template) ->
+    e.preventDefault()
+    Session.set 'selectedApplicationId', Applications.insert(name: template.find('#newApplicationName').value)
+
+  'input #applicationName': (e) -> Applications.update {_id: @_id}, {$set: {name: e.target.value}}
 
 Template.applications.helpers
   removeApplication: ->
