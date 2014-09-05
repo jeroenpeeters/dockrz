@@ -19,15 +19,16 @@ Template.appDetails.rendered = ->
       tags: []
       placeholder: "Select a unit template"
 
-  Deps.autorun ->
-    if Session.get('selectedApplicationId') then Meteor.defer(-> @$("#templates").trigger('change'))
-
 Template.appDetails.helpers
   toString: (valueList) ->
-    _.map(valueList, (item) -> UnitTemplates.findOne(_id: item.id).name).toString()
+    Meteor.defer(-> @$("#templates").trigger('change'))
+    _.map(valueList, (item) -> UnitTemplates.findOne(_id: item.id)._id).toString()
 
 Template.appDetails.events =
   'change #templates': (e) ->
-    console.log e
-    if e.removed then Applications.update {_id: Session.get('selectedApplicationId')}, {"$pull": {templates: {id: e.removed?.id}}}
-    if e.added then Applications.update {_id: Session.get('selectedApplicationId')}, {"$push": {templates: {id: e.added?.id}}}
+    if e.removed
+      Applications.update {_id: Session.get('selectedApplicationId')}, {"$pull": {templates: {id: e.removed?.id}}}
+    else if e.added
+      Applications.update {_id: Session.get('selectedApplicationId')}, {"$push": {templates: {id: e.added?.id}}}
+    else
+      console.log "simple change"
