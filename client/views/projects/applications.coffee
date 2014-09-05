@@ -13,15 +13,16 @@ Template.applications.helpers
     moment(@modifiedAt).fromNow()
 
 Template.appDetails.rendered = ->
-  @$("#templates").select2
-    data: UnitTemplates.find({}).map (tpl) -> id: tpl._id, text: tpl.name
-    tags: []
-    placeholder: "Select a unit template"
+  Deps.autorun ->
+    @$("#templates").select2
+      data: UnitTemplates.find({}).map (tpl) -> id: tpl._id, text: tpl.name
+      tags: []
+      placeholder: "Select a unit template"
 
 Template.appDetails.helpers
   toString: (valueList) ->
     Meteor.defer(-> @$("#templates").trigger('change'))
-    _.pluck(UnitTemplates.find(_id: {$in: _.pluck(valueList, 'id')}).fetch(), '_id').toString()
+    _.pluck(valueList, 'id').toString()
 
 Template.appDetails.events =
   'change #templates': (e) ->
