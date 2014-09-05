@@ -14,6 +14,6 @@ Meteor.subscribe 'activities'
 Meteor.subscribe 'projects'
 Meteor.subscribe 'applications'
 
-Deps.autorun ->
+Tracker.autorun ->
   Meteor.subscribe 'containers', Session.get('dockerEndpoint')
   Meteor.subscribe 'images', Session.get('dockerEndpoint')

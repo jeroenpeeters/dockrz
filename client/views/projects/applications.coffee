@@ -13,7 +13,7 @@ Template.applications.helpers
     moment(@modifiedAt).fromNow()
 
 Template.appDetails.rendered = ->
-  Deps.autorun ->
+  Tracker.autorun ->
     @$("#templates").select2
       data: UnitTemplates.find({}).map (tpl) -> id: tpl._id, text: tpl.name
       tags: []
