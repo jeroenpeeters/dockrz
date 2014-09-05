@@ -1,0 +1,32 @@
+ul.app-list {
+  list-style-type: none;
+  padding: 0.1em 1em 1em 1em;
+  margin-top:1em;
+  background-color: #F8F8F8;
+}
+
+ul.app-list h3 {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+}
+
+ul.app-list .app-image {
+  width:5em;
+}
+
+ul.app-list li {
+  padding:1.5em;
+  margin:1em 0 0 0;
+  background-color: #E7E7E7;
+}
+
+#projectApps {
+  line-height: 10em;
+  font-size: 3em;
+  color: lavender;
+  vertical-align: middle;
+  text-align: center;
+  /*border: 0.2em dashed lightslategray;*/
+  margin: 1em 0 0 0;
+}

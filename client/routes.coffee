@@ -91,6 +91,7 @@ Meteor.startup ->
         data: extend ProjectsController.prototype.data,
           activeProjects: class:"active"
           projects: -> Projects.find()
+          applications: -> Applications.find()
           selectedProject: ->
             Meteor.subscribe 'project', Session.get('selectedProjectId')
             Projects.findOne _id: Session.get('selectedProjectId')

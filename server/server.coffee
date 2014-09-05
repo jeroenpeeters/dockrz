@@ -19,7 +19,7 @@ Meteor.publish 'template', (id) -> UnitTemplates.find {_id: id}
 Meteor.publish 'activities', (id) -> Activity.find {}
 Meteor.publish 'projects', () -> Projects.find {}, {fields: {name: 1}}
 Meteor.publish 'project', (id) -> Projects.find {_id: id}
-Meteor.publish 'applications', () -> Applications.find {}, {fields: {name: 1}}
+Meteor.publish 'applications', () -> Applications.find {}, {sort: {name: 1}}
 Meteor.publish 'application', (id) -> Applications.find {_id: id}
 
 Meteor.methods

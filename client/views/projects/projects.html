@@ -25,11 +25,45 @@
                 </div>
                 <div class="col-md-10">
                     {{#with selectedProject}}
-                    <input type="text" class="form-control" id="projectName" value="{{name}}"/>
-                    Last changed: {{lastChanged}}
+                        {{#each applications}}
+                        app: {{name}} <br/>
+                        {{/each}}
+
+                        {{> projectDetails}}
+
                     {{/with}}
                 </div>
             </div>
         </div>
     </div>
+</template>
+
+<template name="projectDetails">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12"><input type="text" class="form-control" id="projectName" value="{{name}}"/></div>
+        </div>
+        <div class="row">
+            <div class="col-md-8" id="projectApps">
+                <p>Drag apps here...</p>
+            </div>
+            <div class="col-md-4">{{> appList ..}}</div>
+        </div>
+    </div>
+    Last changed: {{lastChanged}}
+</template>
+
+<template name="appList">
+    <ul class="app-list">
+        {{#each applications}}
+            {{> appItem}}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="appItem">
+    <li class="app-item">
+        <img class="app-image" src="{{image_url}}" title="{{name}}" alt="{{name}}"/>
+        <h3>{{name}}</h3>
+  </li>
 </template>

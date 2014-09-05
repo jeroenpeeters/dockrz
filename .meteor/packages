@@ -14,4 +14,5 @@ mrt:moment
 lepozepo:streams
 iron:router
 natestrauser:select2
+mrt:jquery-ui
 
