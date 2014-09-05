@@ -22,7 +22,7 @@ Template.appDetails.rendered = ->
 Template.appDetails.helpers
   toString: (valueList) ->
     Meteor.defer(-> @$("#templates").trigger('change'))
-    _.map(valueList, (item) -> UnitTemplates.findOne(_id: item.id)._id).toString()
+    _.pluck(UnitTemplates.find(_id: {$in: _.pluck(valueList, 'id')}).fetch(), '_id').toString()
 
 Template.appDetails.events =
   'change #templates': (e) ->
