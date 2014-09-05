@@ -13,11 +13,10 @@ Template.applications.helpers
     moment(@modifiedAt).fromNow()
 
 Template.appDetails.rendered = ->
-  Deps.autorun ->
-    @$("#templates").select2
-      data: UnitTemplates.find({}).map (tpl) -> id: tpl._id, text: tpl.name
-      tags: []
-      placeholder: "Select a unit template"
+  @$("#templates").select2
+    data: UnitTemplates.find({}).map (tpl) -> id: tpl._id, text: tpl.name
+    tags: []
+    placeholder: "Select a unit template"
 
 Template.appDetails.helpers
   toString: (valueList) ->
