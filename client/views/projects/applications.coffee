@@ -14,21 +14,22 @@ Template.applications.helpers
 
 Template.appDetails.rendered = ->
   Tracker.autorun ->
-    @$("#templates").select2
+    @$('#templates').select2
       data: UnitTemplates.find({}).map (tpl) -> id: tpl._id, text: tpl.name
       tags: []
-      placeholder: "Select a unit template"
-
+      placeholder: 'Select a unit template'
+    @$('ul.select2-choices').addClass('form-control')
+    
 Template.appDetails.helpers
   toString: (valueList) ->
-    Meteor.defer(-> @$("#templates").trigger('change'))
+    Meteor.defer(-> @$('#templates').trigger('change'))
     _.pluck(valueList, 'id').toString()
 
 Template.appDetails.events =
   'change #templates': (e) ->
     if e.removed
-      Applications.update {_id: Session.get('selectedApplicationId')}, {"$pull": {templates: {id: e.removed?.id}}}
+      Applications.update {_id: Session.get('selectedApplicationId')}, {'$pull': {templates: {id: e.removed?.id}}}
     else if e.added
-      Applications.update {_id: Session.get('selectedApplicationId')}, {"$push": {templates: {id: e.added?.id}}}
+      Applications.update {_id: Session.get('selectedApplicationId')}, {'$push': {templates: {id: e.added?.id}}}
     else
-      console.log "simple change"
+      console.log 'simple change'
