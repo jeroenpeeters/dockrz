@@ -15,13 +15,12 @@ Template.applications.helpers
     moment(@modifiedAt).fromNow()
 
 Template.appDetails.rendered = ->
-  Tracker.autorun ->
-    @$('#templates').select2
-      data: UnitTemplates.find({}).map (tpl) -> id: tpl._id, text: tpl.name
-      tags: []
-      placeholder: 'Select a unit template'
-    @$('ul.select2-choices').addClass('form-control')
-    
+  Tracker.autorun -> _initSelect2 @
+
+Template.appDetails.destroyed = ->
+  @$('.select2-container').context.remove()
+  _initSelect2 @
+
 Template.appDetails.helpers
   toString: (valueList) ->
     Meteor.defer(-> @$('#templates').trigger('change'))
@@ -35,3 +34,10 @@ Template.appDetails.events =
       Applications.update {_id: Session.get('selectedApplicationId')}, {'$push': {templates: {id: e.added?.id}}}
     else
       console.log 'simple change'
+
+_initSelect2 = (tpl) ->
+  tpl.$('#templates').select2
+    data: UnitTemplates.find({}).map (tpl) -> id: tpl._id, text: tpl.name
+    tags: []
+    placeholder: 'Select a unit template'
+  tpl.$('ul.select2-choices').addClass('form-control')

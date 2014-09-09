@@ -27,9 +27,11 @@
                 <div class="col-md-10">
                     {{#with selectedApplication}}
                     <input type="text" class="form-control" id="applicationName" value="{{name}}"/>
-                    {{> appDetails}}
-                    {{/with}}
+                    <div id="appDetails">
+                        {{> appDetails}}
+                    </div>
                     Last changed: {{lastChanged}}
+                    {{/with}}
                 </div>
             </div>
         </div>
