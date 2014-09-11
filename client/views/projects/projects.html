@@ -25,12 +25,7 @@
                 </div>
                 <div class="col-md-10">
                     {{#with selectedProject}}
-                        {{#each applications}}
-                        app: {{name}} <br/>
-                        {{/each}}
-
-                        {{> projectDetails}}
-
+                    {{> projectDetails}}
                     {{/with}}
                 </div>
             </div>
@@ -45,7 +40,14 @@
         </div>
         <div class="row">
             <div class="col-md-8" id="projectApps">
-                <p>Drag apps here...</p>
+                <label>Applications</label>
+                <ul class="app-list">
+                {{#each applications}}
+                {{> projectAppDetail }}
+                {{/each}}
+                    <li class="app-item placeholder">
+                    </li>
+                </ul>
             </div>
             <div class="col-md-4">{{> appList ..}}</div>
         </div>
@@ -62,8 +64,13 @@
 </template>
 
 <template name="appItem">
-    <li class="app-item">
-        <img class="app-image" src="{{image_url}}" title="{{name}}" alt="{{name}}"/>
-        <h3>{{name}}</h3>
+  <li class="app-item">
+      <img class="app-image" src="{{image_url}}" title="{{name}}" alt="{{name}}"/>
+  </li>
+</template>
+
+<template name="projectAppDetail">
+  <li class="app-item">
+      <img class="app-image" src="{{image_url}}" title="{{name}}" alt="{{name}}"/>
   </li>
 </template>

@@ -1,8 +1,10 @@
 ul.app-list {
   list-style-type: none;
-  padding: 0.1em 1em 1em 1em;
-  margin-top:1em;
+  padding: 0 0 0.5em 0.5em;
+  margin-top: 1em;
+  margin-left: auto;
   background-color: #F8F8F8;
+  width:26.6em;
 }
 
 ul.app-list h3 {
@@ -13,20 +15,46 @@ ul.app-list h3 {
 
 ul.app-list .app-image {
   width:5em;
+  border-radius: 0.4em;
 }
 
 ul.app-list li {
-  padding:1.5em;
-  margin:1em 0 0 0;
+  display: inline-block;
+  padding: 1.5em;
+  margin: 0.5em 0.2em 0 0;
   background-color: #E7E7E7;
+  border: 1px solid lightgrey;
+  border-radius: 0.0em;
+  vertical-align: top;
+}
+
+ul.app-list li img {
+  background-color:inherit;
 }
 
 #projectApps {
-  line-height: 10em;
-  font-size: 3em;
-  color: lavender;
-  vertical-align: middle;
-  text-align: center;
-  /*border: 0.2em dashed lightslategray;*/
-  margin: 1em 0 0 0;
+  position: relative;
+}
+
+#projectApps ul.app-list {
+  background-color: white;
+  z-index:1;
+  margin:0;
+  width:100%;
+}
+
+#projectApps ul.app-list .placeholder {
+  background-color: white;
+  border: 2px dashed lightgrey;
+  width: 86px;
+  height: 86px;
+}
+
+#projectApps .app-image {
+  width:3em;
+  border-radius: 0.4em;
+}
+
+#projectApps .project-app {
+  margin-top: 1em;
 }
