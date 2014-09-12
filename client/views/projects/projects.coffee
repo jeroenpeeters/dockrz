@@ -5,7 +5,7 @@ Template.projects.events =
   'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
 
 Template.projects.helpers
-  removeApplication: -> (id) ->Projects.remove _id: id
+  removeProject: -> (id) ->Projects.remove _id: id
   active: -> if @_id == Session.get('selectedProjectId') then "active" else ""
 
 Template.projectDetails.events =
