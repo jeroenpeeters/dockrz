@@ -1,5 +1,6 @@
 Template.projects.events =
-  'click #addProject': (e, template) ->
+  'submit form': (e, template) ->
+    e.preventDefault()
     Session.set 'selectedProjectId', Projects.insert name: template.find('#newProjectName').value
 
   'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
@@ -11,7 +12,8 @@ Template.projects.helpers
 Template.projectDetails.events =
   'input #projectName': (e, template) -> Projects.update {_id: @_id}, {$set: {name: e.target.value}}
   'drop #projectApps': (e, template, ui) ->
-    Projects.update {_id: Session.get 'selectedProjectId'}, {"$push": {applications: _.omit ui.draggable.data('app'), '_id'}}
+    console.log 'dropped', ui.draggable.data('app')
+    Projects.update {_id: Session.get 'selectedProjectId'}, {"$push": {applications: _.omit(ui.draggable.data('app'), '_id')}}
 
 Template.projectDetails.helpers
   lastChanged: -> moment(@modifiedAt).fromNow()

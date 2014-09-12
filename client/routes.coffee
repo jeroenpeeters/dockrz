@@ -91,16 +91,16 @@ Meteor.startup ->
         data: extend ProjectsController.prototype.data,
           activeProjects: class:"active"
           projects: -> Projects.find()
-          applications: -> Applications.find()
+          applicationTemplates: -> ApplicationTemplates.find()
           selectedProject: ->
             Meteor.subscribe 'project', Session.get('selectedProjectId')
             Projects.findOne _id: Session.get('selectedProjectId')
 
-    @route 'applications',
-      path: '/applications/overview'
+    @route 'applicationTemplates',
+      path: '/application-templates/overview'
       controller:  ApplicationsController.extend
         data: extend ApplicationsController.prototype.data,
-          applications: -> Applications.find()
-          selectedApplication: ->
-            Meteor.subscribe 'application', Session.get('selectedApplicationId')
-            Applications.findOne _id: Session.get('selectedApplicationId')
+          applicationTemplates: -> ApplicationTemplates.find()
+          selectedApplicationTemplate: ->
+            Meteor.subscribe 'applicationTemplate', Session.get('selectedApplicationTemplateId')
+            ApplicationTemplates.findOne _id: Session.get('selectedApplicationTemplateId')

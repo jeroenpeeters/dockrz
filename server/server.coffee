@@ -19,8 +19,9 @@ Meteor.publish 'template', (id) -> UnitTemplates.find {_id: id}
 Meteor.publish 'activities', (id) -> Activity.find {}
 Meteor.publish 'projects', () -> Projects.find {}, {fields: {name: 1}}
 Meteor.publish 'project', (id) -> Projects.find {_id: id}
+Meteor.publish 'applicationTemplates', () -> ApplicationTemplates.find {}, {sort: {name: 1}}
+Meteor.publish 'applicationTemplate', (id) -> ApplicationTemplates.find {_id: id}
 Meteor.publish 'applications', () -> Applications.find {}, {sort: {name: 1}}
-Meteor.publish 'application', (id) -> Applications.find {_id: id}
 
 Meteor.methods
   startContainer: Docker.startContainer
@@ -33,6 +34,9 @@ Meteor.methods
   destroyUnit: Fleet.destroyUnit
   submitUnit: Fleet.submitUnit
   getUnitSource: Fleet.getUnitSource
+  createApplication: Application.create
+  startApplication: Application.start
+  stopApplication: Application.stop
 
 _refresh = ->
   Docker.loadRegistry()
