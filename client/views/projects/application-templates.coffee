@@ -1,10 +1,4 @@
 Template.applicationTemplates.events =
-  'click .dropdown-menu': (e) -> e.stopPropagation() unless e.target.tagName.toUpperCase() == 'BUTTON'
-
-  'submit form#newAppTemplate': (e, template) ->
-    e.preventDefault()
-    Session.set 'selectedApplicationTemplateId', ApplicationTemplates.insert(name: template.find('#newApplicationTemplateName').value)
-
   'input #applicationName': (e) -> ApplicationTemplates.update {_id: @_id}, {$set: {name: e.target.value}}
 
   'input #applicationImage': (e) ->
@@ -16,13 +10,12 @@ Template.applicationTemplates.helpers
       ApplicationTemplates.remove _id: id
   lastChanged: ->
     moment(@modifiedAt).fromNow()
+  addApplicationTemplate: -> (appTplName) -> Session.set 'selectedApplicationTemplateId', ApplicationTemplates.insert name: appTplName
 
 Template.applicationTemplateDetails.rendered = ->
-  console.log 'look Im rendered'
   Tracker.autorun -> _initSelect2 @
 
 Template.applicationTemplateDetails.destroyed = ->
-  console.log 'look Im destoyed'
   @$('.select2-container').context.remove()
   _initSelect2 @
 
@@ -33,7 +26,6 @@ Template.applicationTemplateDetails.helpers
 
 Template.applicationTemplateDetails.events =
   'change #templates': (e) ->
-    console.log e
     if e.removed
       ApplicationTemplates.update {_id: Session.get('selectedApplicationTemplateId')}, {"$pull": {unitTemplates: {id: e.removed?.id}}}
     else if e.added

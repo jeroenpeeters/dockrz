@@ -3,26 +3,12 @@
         <div class="panel panel-default">
             <div class="panel-heading" style="height:4em;">
                 <strong>Unit templates</strong>
-
-                <div id="newUnitTemplateDropdown" class="btn-group pull-right">
-                    <button id="newUnitTemplateToggle" type="button" class="btn btn-default dropdown-toggle"
-                            data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-plus"></span> New Project
-                    </button>
-                    <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
-                        <div class="form-group" style="width:35em">
-                            <label>Unit template name</label>
-                            <input type="text" class="form-control" id="newUnitTemplateName"
-                                   placeholder="Enter unit template name">
-                        </div>
-                        <button type="submit" id="addUnitTemplate" class="btn btn-primary">Ok</button>
-                    </form>
-                </div>
+                {{> newItemDropdown caption=" New Unit Template" placeholder="Enter unit template name"
+                    label="Unit template name" onSubmit=addUnitTemplate}}
             </div>
             <div class="panel-body row" style="padding-left:2em;">
                     <div class=" col-md-2">
-                        {{> selectableList items=templates sessionVar='selectedUnitTemplateId'
-                        removeItem=removeUnitTemplate}}
+                        {{> selectableList items=templates sessionVar='selectedUnitTemplateId' removeItem=removeUnitTemplate}}
                     </div>
                     <div class="col-md-10">
                         {{#with selectedTemplate}}

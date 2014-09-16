@@ -3,22 +3,8 @@
         <div class="panel panel-default">
             <div class="panel-heading" style="height:4em;">
                 <strong>Applications</strong>
-
-                <div class="btn-group pull-right">
-                    <button id="newApplicationTemplateDropdownToggle" type="button" class="btn btn-default dropdown-toggle"
-                            data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-plus"></span> New Application Template
-                    </button>
-                    <form id="newAppTemplate" role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
-                        <div class="form-group" style="width:35em">
-                            <label>Application template name</label>
-                            <input type="text" class="form-control" id="newApplicationTemplateName"
-                                   placeholder="Enter application template name">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Ok</button>
-                    </form>
-                </div>
-
+                {{> newItemDropdown caption=" New Application Template" placeholder="Enter application template name"
+                label="Application template name" onSubmit=addApplicationTemplate}}
             </div>
             <div class="panel-body row" style="padding-left:2em;">
                 <div class="col-md-2">

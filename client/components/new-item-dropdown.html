@@ -1,0 +1,15 @@
+<template name="newItemDropdown">
+    <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default dropdown-toggle"
+                data-toggle="dropdown">
+            <span class="glyphicon glyphicon-plus"></span>{{caption}}
+        </button>
+        <form role="form" class="dropdown-menu dropdown-menu-right" style="padding:1em">
+            <div class="form-group" style="width:35em">
+                <label>{{label}}</label>
+                <input type="text" class="form-control new-item" placeholder={{placeholder}}>
+            </div>
+            <button type="submit" class="btn btn-primary">Ok</button>
+        </form>
+    </div>
+</template>
