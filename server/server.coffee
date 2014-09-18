@@ -16,7 +16,7 @@ Meteor.publish 'machines', () -> Machines.find {}
 Meteor.publish 'units', () -> Units.find {}
 Meteor.publish 'templates', () -> UnitTemplates.find {}, {fields: {name: 1}}
 Meteor.publish 'template', (id) -> UnitTemplates.find {_id: id}
-Meteor.publish 'activities', (id) -> Activity.find {}
+Meteor.publish 'activities', (id) -> Activity.find {}, {limit: 10}
 Meteor.publish 'projects', () -> Projects.find {}, {fields: {name: 1}}
 Meteor.publish 'project', (id) -> Projects.find {_id: id}
 Meteor.publish 'applicationTemplates', () -> ApplicationTemplates.find {}, {sort: {name: 1}}
