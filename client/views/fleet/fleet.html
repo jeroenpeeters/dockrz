@@ -40,11 +40,9 @@
                 <thead>
                     <tr>
                         <th>Unit</th>
-                        <th>Desired state</th>
-                        <th>Target machine</th>
-                        <th>Last known state</th>
                         <th>Machine</th>
                         <th>Active</th>
+                        <th>Sub</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -53,11 +51,9 @@
                     {{#if unit}}
                     <tr>
                         <td>{{unit}}</td>
-                        <td>{{desiredState}}</td>
-                        <td>{{targetMachine}}</td>
-                        <td>{{state}}</td>
                         <td>{{machine}}</td>
                         <td>{{active}}</td>
+                        <td>{{sub}}</td>
                         <td>
                             <div class="pull-right">
                                 {{#if isActive}}

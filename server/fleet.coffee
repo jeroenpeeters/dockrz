@@ -10,7 +10,7 @@ fleetctl = (cmd, callback) -> ssh "fleetctl #{cmd}", callback
   listUnits: ->
     fleetctl 'list-units --full --no-legend', Meteor.bindEnvironment (error, stdout, stderr) ->
       updateCollection Units, resultSplitter( stdout, (m) ->
-        {unit: m[0], desiredState: m[1], targetMachine: m[2], state: m[3], machine: m[4], active: m[5]})
+        {unit: m[0], machine: m[1], active: m[2], sub: m[3]})
       , 'unit'
 
   stopUnit: (unitName) -> controlUnit 'stop', unitName
