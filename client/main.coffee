@@ -11,9 +11,6 @@ Meteor.subscribe 'machines'
 Meteor.subscribe 'units'
 Meteor.subscribe 'templates'
 Meteor.subscribe 'activities'
-Meteor.subscribe 'projects'
-Meteor.subscribe 'applicationTemplates'
-Meteor.subscribe 'applications'
 
 
 Tracker.autorun ->

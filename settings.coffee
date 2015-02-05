@@ -10,21 +10,21 @@
       'http://docker7.rni.org:4243',
       'http://docker8.rni.org:4243',
       'http://docker9.rni.org:4243',
-      'http://10.19.88.93:2375',
-      'http://10.19.88.94:2375',
-      'http://10.19.88.95:2375',
-      'http://10.19.88.96:2375',
-      'http://10.19.88.97:2375',
-      'http://10.19.88.98:2375',
-      'http://10.19.88.99:2375',
-      'http://10.19.88.100:2375',
-      'http://10.19.88.101:2375',
-      'http://10.19.88.102:2375']
+      'http://10.19.88.2:2375',
+      'http://10.19.88.3:2375',
+      'http://10.19.88.4:2375',
+      'http://10.19.88.5:2375',
+      'http://10.19.88.6:2375',
+      'http://10.19.88.7:2375',
+      'http://10.19.88.8:2375',
+      'http://10.19.88.9:2375',
+      'http://10.19.88.10:2375',
+      'http://10.19.88.11:2375']
     registry:
       protocol: 'http'
       host:     'docker1.rni.org'
       port:     '5000'
 
   coreos:
-    ssh: 'ssh core@coreos.rni.org '
-    etcd: 'http://coreos.rni.org:4001/v2/keys'
+    ssh: 'ssh core@cluster.ictu '
+    etcd: 'http://cluster.ictu:4001/v2/keys'

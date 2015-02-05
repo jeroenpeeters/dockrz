@@ -22,16 +22,6 @@ Meteor.startup ->
       subMenu: Template.fleetMenu
       activeFleet: class:"active"
 
-  ProjectsController = BaseController.extend
-    data: extend BaseController.prototype.data,
-      subMenu: Template.projectsMenu
-      activeProjects: class:"active"
-
-  ApplicationsController = BaseController.extend
-    data: extend BaseController.prototype.data,
-      subMenu: Template.applicationsMenu
-      activeApplications: class:"active"
-
   Router.map ->
     @route 'home',
       path: '/'
@@ -84,23 +74,3 @@ Meteor.startup ->
         data: extend FleetController.prototype.data,
           machines: -> Machines.find()
           activeMachines: 'active'
-
-    @route 'projects',
-      path: '/projects/overview'
-      controller:  ProjectsController.extend
-        data: extend ProjectsController.prototype.data,
-          activeProjects: class:"active"
-          projects: -> Projects.find()
-          applicationTemplates: -> ApplicationTemplates.find()
-          selectedProject: ->
-            Meteor.subscribe 'project', Session.get('selectedProjectId')
-            Projects.findOne _id: Session.get('selectedProjectId')
-
-    @route 'applicationTemplates',
-      path: '/application-templates/overview'
-      controller:  ApplicationsController.extend
-        data: extend ApplicationsController.prototype.data,
-          applicationTemplates: -> ApplicationTemplates.find()
-          selectedApplicationTemplate: ->
-            Meteor.subscribe 'applicationTemplate', Session.get('selectedApplicationTemplateId')
-            ApplicationTemplates.findOne _id: Session.get('selectedApplicationTemplateId')

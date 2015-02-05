@@ -3,8 +3,6 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="navbar-header"><a class="navbar-brand" style="padding:0 1em 0 1em" href="{{pathFor 'home'}}"><img src="/logo-block.png" style="width:2.5em;"/></a></div>
             <ul class="nav navbar-nav">
-                <li {{activeProjects}}><a href="{{pathFor 'projects'}}"><img src="/project.png" style="height:1.5em" /> Projects</a></li>
-                <li {{activeApplications}}><a href="{{pathFor 'applicationTemplates'}}"><img src="/apps.png" style="height:1.5em" /> Applications</a></li>
                 <li {{activeFleet}}><a href="{{pathFor 'fleet'}}"><img src="/coreos.png" style="height:1.5em" /> Fleet</a></li>
                 <li {{activeDocker}}><a href="{{pathFor 'registry'}}"><img src="/docker.png" style="height:1.5em" /> Docker</a></li>
             </ul>
