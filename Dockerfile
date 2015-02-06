@@ -15,4 +15,4 @@ WORKDIR /app
 
 EXPOSE 80
 
-CMD ["meteor" "--port" "80"]
+ENTRYPOINT ["meteor", "--port", "80"]
